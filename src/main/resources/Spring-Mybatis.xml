@@ -47,6 +47,23 @@
     <!-- 配置mybatis的sqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+　　　　　　　　　　　　　　helperDialect = mysql,
+                            offsetAsPageNum = false,
+                            rowBoundsWithCount = false,
+                            pageSizeZero = true,
+                            reasonable = false,
+                            supportMethodsArguments = false,
+                            returnPageInfo = none
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
         <!-- 自动扫描mappers.xml文件 -->
         <!--<property name="mapperLocations" value="classpath:/mappings/**/*.xml" />-->
     </bean>

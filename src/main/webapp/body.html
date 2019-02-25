@@ -1,3 +1,11 @@
 <div>
-    主体
+    <span>主体</span>
+    <button onclick="ss()">按钮</button>
 </div>
+<script>
+    function ss(){
+        $.post("./user/login",{name:"1"},function (success) {
+            $("span").html(success)
+        })
+    }
+</script>

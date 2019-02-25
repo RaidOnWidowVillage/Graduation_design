@@ -1,5 +1,6 @@
 package com.qiancheng.charging.login.web;
 
+import com.qiancheng.charging.entity.Position;
 import com.qiancheng.charging.login.service.UserSerivce;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +15,9 @@ public class UserController {
     @Autowired
     private UserSerivce userSerivce;
 
-    @RequestMapping(value="/login" , method = {RequestMethod.GET})
+    @RequestMapping(value="/login" , method = {RequestMethod.POST})
     @ResponseBody
-    public String login(String name){
-        return userSerivce.login(name);
+    public String login(Position ps){
+        return userSerivce.login(ps);
     }
 }
