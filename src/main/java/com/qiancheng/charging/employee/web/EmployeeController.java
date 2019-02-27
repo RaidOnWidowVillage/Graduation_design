@@ -16,9 +16,35 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    //新增员工
     @RequestMapping(value="/add_employee" , method = {RequestMethod.POST})
     @ResponseBody
     public ServerResponse AddEmployee(Employee employee){
+        employee.setCreateUser("jayne");//设置创建者
+        employee.setUpdateUser("jayne");//设置修改者
         return employeeService.addEmploy(employee);
+    }
+
+    //删除员工，逻辑删除
+    @RequestMapping(value="/del_employee" , method = {RequestMethod.GET})
+    @ResponseBody
+    public ServerResponse DelEmployee(Employee employee){
+        employee.setUpdateUser("jayne");//设置修改者
+        return employeeService.delEmploy(employee);
+    }
+
+    //更新员工信息
+    @RequestMapping(value="/update_employee" , method = {RequestMethod.POST})
+    @ResponseBody
+    public ServerResponse UpdateEmployee(Employee employee){
+        employee.setUpdateUser("jayne");//设置修改者
+        return employeeService.updateEmploy(employee);
+    }
+
+    //查询员工信息
+    @RequestMapping(value="/select_all_employee" , method = {RequestMethod.GET})
+    @ResponseBody
+    public ServerResponse UpdateEmployee(){
+        return ServerResponse.createBySuccessMessage("1");
     }
 }

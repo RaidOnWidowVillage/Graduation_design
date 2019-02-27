@@ -22,6 +22,35 @@ public class EmployeeServiceImpl implements EmployeeService {
         }else{
             return ServerResponse.createByErrorMessage("增加员工失败");
         }
-
     }
+
+    @Override
+    public ServerResponse<Integer> delEmploy(Employee employee) {
+        employee.setStatus(9);//删除员工状态
+        int result = employeeDao.del_Employee(employee);
+        //如果删除一条成功，返回1
+        if(result>0){
+            return ServerResponse.createBySuccessMessage("删除员工成功");
+        }else{
+            return ServerResponse.createByErrorMessage("删除员工失败");
+        }
+    }
+
+    @Override
+    public ServerResponse<Integer> updateEmploy(Employee employee) {
+        int result = employeeDao.update_Employee(employee);
+        //如果更新一条成功，返回1
+        if(result>0){
+            return ServerResponse.createBySuccessMessage("更新员工成功");
+        }else{
+            return ServerResponse.createByErrorMessage("更新员工失败");
+        }
+    }
+
+    @Override
+    public ServerResponse<Integer> selectAllEmploy(Employee employee) {
+        return null;
+    }
+
+
 }

@@ -17,12 +17,13 @@ public class Employee {
     private Date updateTime;
     private String createUser;
     private String updateUser;
+    private String contact; //应急联系人
 
     public Employee() {
 
     }
 
-    public Employee(String id, String name, int gender, String phone, String email, String address, String departmentId, String positionId, int status, String salaryId, Date createTime, Date updateTime, String createUser, String updateUser) {
+    public Employee(String id, String name, int gender, String phone, String email, String address, String departmentId, String positionId, int status, String salaryId, Date createTime, Date updateTime, String createUser, String updateUser,String contact) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -37,6 +38,7 @@ public class Employee {
         this.updateTime = updateTime;
         this.createUser = createUser;
         this.updateUser = updateUser;
+        this.contact = contact;
     }
 
     public String getId() {
@@ -149,5 +151,13 @@ public class Employee {
 
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }
