@@ -13,12 +13,13 @@ public class User {
     private Date updateTime;
     private String createUser;
     private String updateUser;
+    private Date lastLoginTime;
 
     public User() {
 
     }
 
-    public User(String id, String username, String password, int role, int flag, String positionId, Date createTime, Date updateTime, String createUser, String updateUser) {
+    public User(String id, String username, String password, int role, int flag, String positionId, Date createTime, Date updateTime, String createUser, String updateUser, Date lastLoginTime) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -29,6 +30,7 @@ public class User {
         this.updateTime = updateTime;
         this.createUser = createUser;
         this.updateUser = updateUser;
+        this.lastLoginTime = lastLoginTime;
     }
 
     public String getId() {
@@ -47,11 +49,11 @@ public class User {
         this.username = username;
     }
 
-    public String getPasseword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPasseword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -110,4 +112,13 @@ public class User {
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
     }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
 }
