@@ -1,7 +1,186 @@
-<div>
-部门
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">部门信息管理</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form role="form">
+                            <div class="row">
+                                <div class="form-group col-md-2">
+                                    <label>部门名称</label>
+                                    <select class="form-control">
+                                        <option>阿莫西林</option>
+                                        <option>Two Vale</option>
+                                        <option>Three Vale</option>
+                                        <option>Four Vale</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>部门经理</label>
+                                    <select class="form-control">
+                                        <option>25.0</option>
+                                        <option>Two Vale</option>
+                                        <option>Three Vale</option>
+                                        <option>Four Vale</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>部门创建时间</label>
+                                    <input type="date" class="form-control">
+                                </div>
+                                <div class="form-group col-md-2">
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <div style="height: 24px"></div>
+                                    <button type="submit" class="btn btn-success">条件搜索</button>
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <div style="height: 24px"></div>
+                                    <button type="reset" class="btn btn-success" data-toggle="modal" data-target="#myModal">创建部门</button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- 搜索条件 -->
+                        <hr />
+                        <!-- 表格&分页 -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">部门数据</div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>编号</th>
+                                            <th>部门名称</th>
+                                            <th>部门经理</th>
+                                            <th>部门人数</th>
+                                            <th>部门创建时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>阿莫西林</td>
+                                            <td>25.0</td>
+                                            <td>400</td>
+                                            <td>400</td>
+                                            <td>
+                                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
+                                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
+                                                <a class="btn btn-success btn-xs">删除</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>鼻严康</td>
+                                            <td>26.0</td>
+                                            <td>400</td>
+                                            <td>400</td>
+                                            <td>
+                                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
+                                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
+                                                <a class="btn btn-success btn-xs">删除</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>胃舒宁</td>
+                                            <td>22.0</td>
+                                            <td>400</td>
+                                            <td>400</td>
+                                            <td>
+                                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
+                                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
+                                                <a class="btn btn-success btn-xs">删除</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>心必治</td>
+                                            <td>38.0</td>
+                                            <td>400</td>
+                                            <td>400</td>
+                                            <td>
+                                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
+                                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
+                                                <a class="btn btn-success btn-xs">删除</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>骨立康</td>
+                                            <td>14.0</td>
+                                            <td>400</td>
+                                            <td>400</td>
+                                            <td>
+                                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
+                                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
+                                                <a class="btn btn-success btn-xs">删除</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>肠安宁</td>
+                                            <td>19.0</td>
+                                            <td>400</td>
+                                            <td>400</td>
+                                            <td>
+                                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
+                                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
+                                                <a class="btn btn-success btn-xs">删除</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td>肠安宁</td>
+                                            <td>19.0</td>
+                                            <td>400</td>
+                                            <td>400</td>
+                                            <td>
+                                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
+                                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
+                                                <a class="btn btn-success btn-xs">删除</a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" style="top:100px;" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">创建部门</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label>部门名称:</label>
+                        <input id = "title" class="form-control" placeholder="请输入部门名称" />
+                    </div>
+                    <div class="form-group">
+                        <label>部门经理:</label>
+                        <input id = "author" class="form-control" placeholder="请输入部门经理" />
+                    </div>
+                    <div style="text-align: center;">
+                        <input type="button"  class="btn btn-success" value="提交" />
+                        <input type="button"  class="btn btn-default" value="撤销" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
 </div>
 
-<script>
-
-</script>
+<script src="../resources/assets/js/admin_include.js"></script>
