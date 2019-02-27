@@ -6,7 +6,7 @@ public class Employee {
     private String id; //员工id
     private String name; //姓名
     private int gender; //性别 0男 1女
-    private int phone; //电话
+    private String phone; //电话
     private String email; //email
     private String address; //地址
     private String departmentId; //部门id
@@ -22,7 +22,7 @@ public class Employee {
 
     }
 
-    public Employee(String id, String name, int gender, int phone, String email, String address, String departmentId, String positionId, int status, String salaryId, Date createTime, Date updateTime, String createUser, String updateUser) {
+    public Employee(String id, String name, int gender, String phone, String email, String address, String departmentId, String positionId, int status, String salaryId, Date createTime, Date updateTime, String createUser, String updateUser) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -63,11 +63,11 @@ public class Employee {
         this.gender = gender;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
