@@ -6,6 +6,9 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
   <display-name>Archetype Created Web Application</display-name>
+  <welcome-file-list>
+    <welcome-file>login.html</welcome-file>
+  </welcome-file-list>
   <!-- Spring和mybatis的配置文件 -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
@@ -44,6 +47,10 @@
   <listener>
     <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
   </listener>
+  <!-- session监听器 -->
+  <listener>
+    <listener-class>com.qiancheng.charging.common.SessionListener</listener-class>
+  </listener>
 
   <!-- Spring MVC 核心配置开始 -->
   <servlet>
@@ -59,18 +66,17 @@
     <load-on-startup>1</load-on-startup>
   </servlet>
 
-
   <!-- 拦截设置 -->
   <servlet-mapping>
     <servlet-name>mvc-dispatcher</servlet-name>
-    <!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
-    <url-pattern>/</url-pattern>
+    <url-pattern>*.api</url-pattern>
   </servlet-mapping>
+
   <!-- Spring MVC 核心配置结束 -->
 
   <!-- 配置SESSION超时，单位是分钟 -->
   <session-config>
-    <session-timeout>30</session-timeout>
+    <session-timeout>1</session-timeout>
   </session-config>
 
 </web-app>

@@ -45,6 +45,7 @@ function getRootPath() {
 dynamicLoading.meta();
 
 //动态加载项目 CSS文件
+dynamicLoading.css("/resources/assets/css/toastr.min.css");
 dynamicLoading.css("/resources/assets/css/bootstrap.css");
 dynamicLoading.css("/resources/assets/css/font-awesome.css");
 dynamicLoading.css("/resources/assets/js/morris/morris-0.4.3.min.css");
@@ -57,7 +58,9 @@ dynamicLoading.css("http://fonts.googleapis.com/css?family=Open+Sans");
 //动态加载项目 JS文件
 dynamicLoading.js("/resources/assets/js/jquery-1.10.2.js", "utf-8");
 dynamicLoading.js("/resources/assets/js/bootstrap.min.js", "utf-8");
+dynamicLoading.js("/resources/assets/js/toastr.min.js", "utf-8");
 dynamicLoading.js("/resources/assets/js/jquery.metisMenu.js", "utf-8");
 dynamicLoading.js("/resources/assets/js/morris/raphael-2.1.0.min.js", "utf-8");
 dynamicLoading.js("/resources/assets/js/dataTables/jquery.dataTables.js", "utf-8");
 dynamicLoading.js("/resources/assets/js/dataTables/dataTables.bootstrap.js", "utf-8");
+dynamicLoading.js("/resources/assets/js/response.js", "utf-8");
