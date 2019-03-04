@@ -38,13 +38,19 @@ public class EmployeeController {
     @ResponseBody
     public ServerResponse UpdateEmployee(Employee employee){
         employee.setUpdateUser("jayne");//设置修改者
-        return employeeService.updateEmploy(employee);
+        //数据验证
+        if(employee.getId()==null&&employee.getName()==null&&employee.getPhone()==null&&employee.getAddress()==null&&employee.getDepartmentId()==null&&employee.getPositionId()==null&&employee.getSalaryId()==null&&employee.getSalaryId()==null){
+            return ServerResponse.createByErrorMessage("参数错误");
+        }else{
+            return employeeService.updateEmploy(employee);
+        }
+
     }
 
     //查询员工信息
     @RequestMapping(value="/select_all_employee" , method = {RequestMethod.GET})
     @ResponseBody
-    public ServerResponse UpdateEmployee(){
-        return ServerResponse.createBySuccessMessage("1");
+    public ServerResponse SelectAllEmployee(){
+        return employeeService.selectAllEmploy();
     }
 }

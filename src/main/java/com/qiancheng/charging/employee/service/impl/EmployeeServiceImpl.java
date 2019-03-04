@@ -2,10 +2,13 @@ package com.qiancheng.charging.employee.service.impl;
 
 import com.qiancheng.charging.common.ServerResponse;
 import com.qiancheng.charging.employee.dao.EmployeeDao;
+import com.qiancheng.charging.employee.entity.EmployeeBO;
 import com.qiancheng.charging.employee.service.EmployeeService;
 import com.qiancheng.charging.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -48,8 +51,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public ServerResponse<Integer> selectAllEmploy(Employee employee) {
-        return null;
+    public ServerResponse<List<EmployeeBO>> selectAllEmploy() {
+        List<EmployeeBO> result = employeeDao.select_All_Employee();
+        return ServerResponse.createBySuccess(result);
     }
 
 
