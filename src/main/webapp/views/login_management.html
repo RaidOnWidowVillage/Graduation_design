@@ -1,7 +1,357 @@
-<div>
-登录管理
+<div style="width: 98%;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">用户信息管理</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form role="form">
+                                <div class="row">
+                                    <div class="form-group col-md-2">
+                                        <label>用户名</label>
+                                        <input type="text" class="form-control"/>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label>所属职位</label>
+                                        <select class="form-control">
+                                            <option>人事</option>
+                                            <option>开发</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label>当前角色</label>
+                                        <select class="form-control">
+                                            <option>管理员</option>
+                                            <option>普通用户</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-1"></div>
+                                    <div class="form-group col-md-1">
+                                        <div style="height: 24px"></div>
+                                        <button type="submit" class="btn btn-success">条件搜索</button>
+                                    </div>
+                                    <div class="form-group col-md-1">
+                                        <div style="height: 24px"></div>
+                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addUser">创建新用户</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!-- 搜索条件 -->
+                            <hr />
+                            <!-- 表格&分页 -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">用户数据</div>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>编号</th>
+                                                <th>用户名</th>
+                                                <th>角色</th>
+                                                <th>职位</th>
+                                                <th>状态</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="listBody">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>阿莫西林</td>
+                                                <td>25.0</td>
+                                                <td>400</td>
+                                                <td>400</td>
+                                                <td>
+                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
+                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
+                                                    <a class="btn btn-success btn-xs">删除</a>
+                                                </td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <ul class="pagination" id="pageNum">
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" style="top:100px;" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">查看用户详细信息</h4>
+                </div>
+                <div class="modal-body" id="XiangQingUser">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>用户名:</label>
+                            <input  class="form-control" placeholder="请输入用户名" />
+                        </div>
+                        <div class="form-group">
+                            <label>密码:</label>
+                            <input  class="form-control" placeholder="请输入密码" />
+                        </div>
+                        <div class="form-group">
+                            <label>角色:</label>
+                            <input  class="form-control" placeholder="请输入角色" />
+                        </div>
+                        <div class="form-group">
+                            <label>职位:</label>
+                            <input  class="form-control" placeholder="请输入职位" />
+                        </div>
+                        <div class="form-group">
+                            <label>状态:</label>
+                            <input  class="form-control" placeholder="请输入状态" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" style="top:100px;" id="addUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="addUserLab">新增用户</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>用户名:</label>
+                            <input  class="form-control" placeholder="请输入用户名" />
+                        </div>
+                        <div class="form-group">
+                            <label>密码:</label>
+                            <input  class="form-control" placeholder="请输入密码" />
+                        </div>
+                        <div class="form-group">
+                            <label>角色:</label>
+                            <input  class="form-control" placeholder="请输入角色" />
+                        </div>
+                        <div class="form-group">
+                            <label>职位:</label>
+                            <input  class="form-control" placeholder="请输入职位" />
+                        </div>
+                        <div class="form-group">
+                            <label>状态:</label>
+                            <input  class="form-control" placeholder="请输入状态" />
+                        </div>
+                        <div style="text-align: center;">
+                            <input type="submit"  class="btn btn-success" value="提交" />
+                            <input type="reset"  class="btn btn-default" value="撤销" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" style="top:100px;" id="UpdateUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="UpdateUserLab">新增用户</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>用户名:</label>
+                            <input  class="form-control" placeholder="请输入用户名" />
+                        </div>
+                        <div class="form-group">
+                            <label>密码:</label>
+                            <input  class="form-control" placeholder="请输入密码" />
+                        </div>
+                        <div class="form-group">
+                            <label>角色:</label>
+                            <input  class="form-control" placeholder="请输入角色" />
+                        </div>
+                        <div class="form-group">
+                            <label>职位:</label>
+                            <input  class="form-control" placeholder="请输入职位" />
+                        </div>
+                        <div class="form-group">
+                            <label>状态:</label>
+                            <input  class="form-control" placeholder="请输入状态" />
+                        </div>
+                        <div style="text-align: center;">
+                            <input type="submit"  class="btn btn-success" value="提交" />
+                            <input type="reset"  class="btn btn-default" value="撤销" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
 </div>
 
+<script src="../resources/assets/js/admin_include.js"></script>
 <script>
+    $(function () {
+        user.render()
+    })
+
+    function User() {
+        this.render = function(){
+            $.get("../user/getAllUser.api",function(res){
+                if(null !== res) {
+                    var arr = []
+                    var num = 1
+                    res.data.forEach(function (item) {
+
+                        if(item.role===1){
+                            item.role="管理员"
+                        }else{
+                            item.role="普通用户"
+                        }
+
+                        if(item.flag===1){
+                            item.flag="在职"
+                        }else{
+                            item.flag="离职"
+                        }
+
+                        arr.push(`
+                        <tr>
+                            <td>${num}</td>
+                            <td>${item.username}</td>
+                            <td>${item.role}</td>
+                            <td>${item.positionId}</td>
+                            <td>${item.flag}</td>
+                            <td>
+                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#UpdateUser" ">修改</a>
+                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal" onclick="user.selectUserById('${item.id}')">查看</a>
+                                <a class="btn btn-success btn-xs">删除</a>
+                            </td>
+                        </tr>
+                    `)
+                        num++;
+                    })
+                    document.getElementById('listBody').innerHTML = arr.join('')
+                }
+            })
+        }
+
+        this.selectUserById = function(id) {
+        $.post("../user/getOneUser.api",{id:id},function(res) {
+            if (null != res) {
+                var arr = []
+
+                if(res.data.role===1){
+                    res.data.role="管理员"
+                }else{
+                    res.data.role="普通用户"
+                }
+
+                if(res.data.flag===1){
+                    res.data.flag="在职"
+                }else{
+                    res.data.flag="离职"
+                }
+
+                arr.push(`
+                    <form role="form">
+                        <div class="form-group">
+                            <label>用户名:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.username}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>角色:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.role}"/>
+                        </div>
+
+                        <select class="form-control">
+                            <option>管理员</option>
+                            <option>普通用户</option>
+                        </select>
+
+                        <div class="form-group">
+                            <label>状态:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.flag}"/>
+                        </div>
+                    </form>
+                `)
+
+                document.getElementById('XiangQingUser').innerHTML = arr.join('')
+                }
+            })
+        }
+
+        this.updateUser = function (id) {
+            $.post("../user/getOneUser.api",{id:id},function(res) {
+                if (null != res) {
+                    var arr = []
+
+                    if(res.data.role===1){
+                        res.data.role="管理员"
+                    }else{
+                        res.data.role="普通用户"
+                    }
+
+                    if(res.data.flag===1){
+                        res.data.flag="在职"
+                    }else{
+                        res.data.flag="离职"
+                    }
+
+                    arr.push(`
+                    <form role="form">
+                        <div class="form-group">
+                            <label>用户名:</label>
+                            <input  class="form-control"  value="${res.data.username}"/>
+                        </div>
+                        <div class="form-group">
+                            <label>密码:</label>
+                            <input  class="form-control"  value="${res.data.username}"/>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>角色</label>
+                            <select class="form-control">
+                                <option>管理员</option>
+                                <option>普通用户</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label>职位</label>
+                            <select class="form-control">
+                                <option>管理员</option>
+                                <option>普通用户</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label>状态</label>
+                            <select class="form-control">
+                                <option>在职</option>
+                                <option>离职</option>
+                            </select>
+                        </div>
+                    </form>
+                `)
+
+                    document.getElementById('XiangQingUser').innerHTML = arr.join('')
+                }
+            })
+        }
+    }
+    window.user = new User();
+
 
 </script>

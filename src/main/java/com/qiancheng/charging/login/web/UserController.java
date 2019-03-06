@@ -44,7 +44,7 @@ public class UserController {
                     session.setAttribute("userMsg",res);
                     SessionContext.AddSession(session);
                     //更新上次登陆时间
-                    userService.lastLoginTime();
+                    userService.lastLoginTime(res.getId());
                     return ServerResponse.createBySuccessMessage("登录成功");
                 }else{
                     return ServerResponse.createByErrorMessage("账户名与密码错误");
@@ -69,5 +69,24 @@ public class UserController {
         }else{
             return ServerResponse.createByErrorMessage("获取用户信息失败");
         }
+    }
+
+    @RequestMapping(value="/getAllUser" , method = {RequestMethod.GET})
+    @ResponseBody
+    public ServerResponse getAllUser(){
+        return userService.selectAllUser();
+    }
+
+
+    @RequestMapping(value="/getOneUser" , method = {RequestMethod.POST})
+    @ResponseBody
+    public ServerResponse getUserById(String id){
+        return userService.selectUserById(id);
+    }
+
+    @RequestMapping(value="/UpdateUser" , method = {RequestMethod.POST})
+    @ResponseBody
+    public ServerResponse UpdateUserById(User user){
+        return userService.updateUserById(user);
     }
 }

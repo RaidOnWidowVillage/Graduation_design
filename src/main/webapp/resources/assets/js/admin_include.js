@@ -56,7 +56,7 @@ dynamicLoading.css("http://fonts.googleapis.com/css?family=Open+Sans");
 
 
 //动态加载项目 JS文件
-dynamicLoading.js("/resources/assets/js/jquery-1.10.2.js", "utf-8");
+dynamicLoading.js("/resources/assets/js/jquery-3.3.1.min.js", "utf-8");
 dynamicLoading.js("/resources/assets/js/bootstrap.min.js", "utf-8");
 dynamicLoading.js("/resources/assets/js/toastr.min.js", "utf-8");
 dynamicLoading.js("/resources/assets/js/jquery.metisMenu.js", "utf-8");
