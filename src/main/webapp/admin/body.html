@@ -2,7 +2,7 @@
     <div id="page-inner">
         <div class="row">
             <div class="col-md-12">
-                <h2>超级管理员：<span>刘佳印</span></h2>
+                <h2>超级管理员：<span id="adminName">刘佳印</span></h2>
                 <h5>欢迎使用人力资源管理系统. </h5>
             </div>
         </div>
@@ -16,5 +16,15 @@
     </div>
 </div>
 <script>
+    $(function () {
+        $.get("../user/getUserInfo.api",function(res){
+            if(null !== res){
+                if(res.status === 0){
+                    $("#adminName").text(res.data.username);
+                    $("#loginTime").text(res.data.lastLoginTime);
+                }
+            }
+        })
+    })
 
 </script>

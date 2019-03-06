@@ -11,8 +11,8 @@
         <div class="row text-center ">
             <div class="col-md-12">
                 <br /><br />
-                <h2> 尊敬的用户 : Login</h2>
-                <h5>( 正常登录获取考勤信息 )</h5><br />
+                <h2> 尊敬的用户</h2>
+                <h5>欢迎登陆公司行政管理系统</h5><br />
                 <br />
             </div>
         </div>
@@ -34,9 +34,9 @@
                                 <input type="password" id="password" class="form-control"  placeholder="密码" required="required"/>
                             </div>
                             <div class="form-group">
-                                <span class="pull-left">
-                                    <a href="#" style="position: relative;top: 10px">忘记密码？</a>
-                                </span>
+                                <!--<span class="pull-left">-->
+                                    <!--<a href="#" style="position: relative;top: 10px">忘记密码？</a>-->
+                                <!--</span>-->
                                 <span class="pull-right">
                                     <!--<a href="admin/index.html" class="btn btn-primary " onclick="login();">登录</a>-->
                                     <a href="#" class="btn btn-primary " onclick="login();">登录</a>
@@ -59,13 +59,12 @@
             toastr.error("请输入正确账号与密码");
             return false
         }else{
-            $.post("./user/login.api",{username:username,password:password},function(data){
-                debugger;
-                if(null !== data){
-                    if(data.data.loginStatus === 0){
+            $.post("./user/login.api",{username:username,password:password},function(res){
+                if(null !== res){
+                    if(res.status === 0){
                         toastr.success("登录成功");
                         setTimeout(function(){
-                            window.location.href = data.data.url;
+                            window.location.href = "/admin/index.html";
                         },3000);
                     }else{
                         toastr.error("账号或者密码错误");
