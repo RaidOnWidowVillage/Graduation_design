@@ -12,10 +12,9 @@ public class Department {
     private String manager;
 
     public Department() {
-
     }
 
-    public Department(String id, String name, Date createTime, Date updateTime, String createUser, String updateUser,String manager) {
+    public Department(String id, String name, Date createTime, Date updateTime, String createUser, String updateUser, String manager) {
         this.id = id;
         this.name = name;
         this.createTime = createTime;
@@ -72,9 +71,8 @@ public class Department {
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
     }
-    public String getManager() { return manager;}
 
-    public void getManager(String manager) {
-        this.manager = manager;
-    }
+    public String getManager() { return manager; }
+
+    public void setManager(String manager) { this.manager = manager; }
 }

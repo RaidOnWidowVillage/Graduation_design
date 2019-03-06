@@ -4,6 +4,7 @@ import com.qiancheng.charging.common.ServerResponse;
 import com.qiancheng.charging.entity.Department;
 import com.qiancheng.charging.entity.User;
 import com.qiancheng.charging.department.service.DepartmentService;
+import javafx.scene.control.Alert;
 import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,13 +32,16 @@ public class DepartmentController {
     @ResponseBody
     public ServerResponse deleteDepartment(Department dep){
         dep.setUpdateUser("yananding");
-        String name = dep.getName();
+        String id = dep.getId();
         return departmentService.deleteDepartment(dep);
     }
     @RequestMapping(value="/update_department" , method = {RequestMethod.POST})
     @ResponseBody
     public ServerResponse updateDepartment(Department dep){
         dep.setUpdateUser("yananding");
+        String id = dep.getId();
+        String name = dep.getName();
+        String manager = dep.getManager();
         return departmentService.updateDepartment(dep);
     }
     @RequestMapping(value="/select_department" , method = {RequestMethod.POST})

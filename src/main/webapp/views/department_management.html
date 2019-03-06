@@ -10,20 +10,12 @@
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label>部门名称</label>
-                                        <select class="form-control">
-                                            <option>阿莫西林</option>
-                                            <option>Two Vale</option>
-                                            <option>Three Vale</option>
-                                            <option>Four Vale</option>
+                                        <select class="form-control" id="bumen">
                                         </select>
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label>部门经理</label>
-                                        <select class="form-control">
-                                            <option>25.0</option>
-                                            <option>Two Vale</option>
-                                            <option>Three Vale</option>
-                                            <option>Four Vale</option>
+                                        <select class="form-control" id="jinli">
                                         </select>
                                     </div>
                                     <div class="form-group col-md-2">
@@ -38,7 +30,7 @@
                                     </div>
                                     <div class="form-group col-md-1">
                                         <div style="height: 24px"></div>
-                                        <button type="reset" class="btn btn-success" data-toggle="modal" data-target="#myModal">创建部门</button>
+                                        <button type="reset" class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick="add()">创建部门</button>
                                     </div>
                                 </div>
                             </form>
@@ -49,7 +41,7 @@
                                 <div class="panel-heading">部门数据</div>
                                 <div class="panel-body">
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-bordered table-hover" id="q">
+                                        <table class="table table-striped table-bordered table-hover">
                                             <thead>
                                             <tr>
                                                 <th>编号</th>
@@ -60,6 +52,8 @@
                                                 <th>操作</th>
                                             </tr>
                                             </thead>
+                                            <tbody id="ddd">
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -88,8 +82,8 @@
                             <input id = "author" class="form-control" placeholder="请输入部门经理" />
                         </div>
                         <div style="text-align: center;">
-                            <input type="button" id="submit" class="btn btn-success" value="提交" />
-                            <input type="button"  class="btn btn-default" value="撤销" />
+                            <input type="button"  id="suu" class="btn btn-success" value="提交" />
+                            <input type="button" id="re" class="btn btn-default" onclick="reset()" value="撤销" />
                         </div>
                     </form>
                 </div>
@@ -101,6 +95,35 @@
 
 <script src="../resources/assets/js/admin_include.js"></script>
 <script type="text/javascript">
+    $(function(){
+        $(".form-control").empty();
+        $.ajax({
+            type:'post',
+            url:"../department/select_department",
+            success:function (data) {
+                $(".form-control").append("<option value='-1'>--请选择--</option>");
+                depList = data.data;
+                for(var i = 0;i < depList.length ; i++){
+                    var dep = depList[i];
+                    var kindname = dep.name;
+                    var managername = dep.manager;
+                    $("#bumen").append("<option value='"+dep.name+"'>"+kindname+"</option>");
+                    $("#jinli").append("<option value='"+dep.manager+"'>"+managername+"</option>");
+                }
+
+            }
+        });
+    })
+
+    function queryBy(){
+        $("#bumen").change(function(){
+            var bumenname = $("#bumen").val();
+        })
+        $("#jinli").change(function(){
+            var jinliname = $("#jinli").val();
+        })
+    }
+
     $.ajax({
         type:'post',
         url:"../department/select_department",
@@ -113,45 +136,126 @@
         depList = data.data;
         for(var i = 0 ; i < depList.length ; i++){
             var dept = depList[i];
-            var liDom = '<tbody>';
-            liDom += '<tr>';
+            var liDom = '<tr id="tr_'+dept.id+'">';
             liDom += '<td>'+dept.id+'</td>';
             liDom += '<td>'+dept.name+'</td>';
             liDom += '<td>'+dept.manager+'</td>';
             liDom += '<td>400</td>';
             liDom += '<td>400</td>';
             liDom += '<td>';
-            liDom += '<a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>';
-            liDom += '<a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>';
-            liDom += '<a class="btn btn-success btn-xs" onclick="deletedepartment('+dept.name+')">删除</a>'
+            liDom += "<a class='btn btn-success btn-xs' data-toggle='modal' data-target='#myModal' onclick='change("+"\""+dept.id+"\""+","+"\""+dept.name+"\""+","+"\""+dept.manager+"\""+")'>修改</a>";
+            liDom += "<a class='btn btn-success btn-xs' data-toggle='modal' data-target='#myModal' onclick='look("+"\""+dept.name+"\""+","+"\""+dept.manager+"\""+")'>查看</a>";
+            liDom += "<a class='btn btn-success btn-xs' onclick='deletea("+"\""+dept.id+"\""+")'>删除</a>"
             liDom += '</td>';
             liDom += '</tr>';
-            liDom += '</tbody>';
-            $("#q").append(liDom);
+            $("#ddd").append(liDom);
         }
     }
-    //点击登陆按钮，提交信息
-    $("#submit").click(function(){
-        $.ajax({
-            type:'post',
-            url:'../department/add_department',
-            data:{
-                name:$('#title').val(),
-                manager:$('#author').val()
-            }
-        })
-    })
-
-    function deletedepartment(deptname){
-        $.ajax({
-            type:'post',
-            url:'../department/delete_department',
-            data:{
-                name:deptname
-            }
+    //创建部门模块变化
+    function add() {
+        $("#suu").show();
+        $("#suu").attr("value","提交");
+        $("#re").show();
+        $("#myModalLabel").text("创建部门")
+        $("#title").attr('placeholder','请输入部门名称');
+        $("#title").attr('disabled',false);
+        $("#author").attr('placeholder','请输入部门经理');
+        $("#author").attr('disabled',false);
+        $("#suu").click(function () {
+            closedialog();
         })
     }
+    //点击提交按钮，提交部门信息
+    function closedialog(){
+        if(confirm("确定要提交吗？")){
+            window.event.returnValue = true;
+        }else{
+            window.event.returnValue = false;
+        }
+        if(window.event.returnValue == true){
+            $.ajax({
+                type:'post',
+                url:'../department/add_department',
+                data:{
+                    name:$('#title').val(),
+                    manager:$('#author').val()
+                }
+            })
+            $("#myModal").hide();
+        }else{
 
+        }
+    }
+    //撤销功能
+    function reset(){
+        $('#title').val("");
+        $('#author').val("");
+    }
+    //删除部门功能
+    function deletea(id){
+        if(confirm("确定要删除吗？")){
+            window.event.returnValue = true;
+        }else{
+            window.event.returnValue = false;
+        }
+        if(window.event.returnValue == true){
+            $.ajax({
+                type:'post',
+                url:'../department/delete_department',
+                data:{
+                    id:id
+                },
+            })
+            $("#tr_"+id).remove();
+        }else{
 
+        }
+    }
+    //修改部门
+    function change(id,name,manager){
+        $("#suu").show();
+        $("#re").show();
+        $("#suu").attr("value","修改");
+        $("#myModalLabel").text("修改部门")
+        $("#title").attr('placeholder',name);
+        $("#title").attr('disabled',false);
+        $("#author").attr('placeholder',manager);
+        $("#author").attr('disabled',false);
+        $("#suu").click(function(){
+            update(id);
+        })
+    }
+    function update(id){
+        if(confirm("确定要修改吗？")){
+            window.event.returnValue = true;
+        }else{
+            window.event.returnValue = false;
+        }
+        if(window.event.returnValue == true){
+            $.ajax({
+                type:'post',
+                url:'../department/update_department',
+                data:{
+                    id:id,
+                    name:$('#title').val(),
+                    manager:$('#author').val()
+                }
+            })
+            $("#myModal").hide();
+        }else{
+
+        }
+
+    }
+    //查看部门
+    function look(name,manager){
+        $("#suu").hide();
+        $("#re").hide();
+        $("#title").attr('placeholder',name);
+        $("#title").attr('disabled',true);
+        $("#author").attr('placeholder',manager);
+        $("#author").attr('disabled',true);
+        $("#myModalLabel").text("查看部门")
+    }
 </script>
 
