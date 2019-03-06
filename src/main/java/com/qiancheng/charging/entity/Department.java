@@ -9,18 +9,20 @@ public class Department {
     private Date updateTime;
     private String createUser;
     private String updateUser;
+    private String manager;
 
     public Department() {
 
     }
 
-    public Department(String id, String name, Date createTime, Date updateTime, String createUser, String updateUser) {
+    public Department(String id, String name, Date createTime, Date updateTime, String createUser, String updateUser,String manager) {
         this.id = id;
         this.name = name;
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.createUser = createUser;
         this.updateUser = updateUser;
+        this.manager = manager;
     }
 
     public String getId() {
@@ -69,5 +71,10 @@ public class Department {
 
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
+    }
+    public String getManager() { return manager;}
+
+    public void getManager(String manager) {
+        this.manager = manager;
     }
 }

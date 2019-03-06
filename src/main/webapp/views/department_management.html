@@ -49,7 +49,7 @@
                                 <div class="panel-heading">部门数据</div>
                                 <div class="panel-body">
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-bordered table-hover">
+                                        <table class="table table-striped table-bordered table-hover" id="q">
                                             <thead>
                                             <tr>
                                                 <th>编号</th>
@@ -60,92 +60,6 @@
                                                 <th>操作</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>阿莫西林</td>
-                                                <td>25.0</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
-                                                    <a class="btn btn-success btn-xs">删除</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>鼻严康</td>
-                                                <td>26.0</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
-                                                    <a class="btn btn-success btn-xs">删除</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>胃舒宁</td>
-                                                <td>22.0</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
-                                                    <a class="btn btn-success btn-xs">删除</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>心必治</td>
-                                                <td>38.0</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
-                                                    <a class="btn btn-success btn-xs">删除</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>骨立康</td>
-                                                <td>14.0</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
-                                                    <a class="btn btn-success btn-xs">删除</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>肠安宁</td>
-                                                <td>19.0</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
-                                                    <a class="btn btn-success btn-xs">删除</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>肠安宁</td>
-                                                <td>19.0</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
-                                                    <a class="btn btn-success btn-xs">删除</a>
-                                                </td>
-                                            </tr>
-                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -174,7 +88,7 @@
                             <input id = "author" class="form-control" placeholder="请输入部门经理" />
                         </div>
                         <div style="text-align: center;">
-                            <input type="button"  class="btn btn-success" value="提交" />
+                            <input type="button" id="submit" class="btn btn-success" value="提交" />
                             <input type="button"  class="btn btn-default" value="撤销" />
                         </div>
                     </form>
@@ -186,3 +100,58 @@
 </div>
 
 <script src="../resources/assets/js/admin_include.js"></script>
+<script type="text/javascript">
+    $.ajax({
+        type:'post',
+        url:"../department/select_department",
+        success:function (data) {
+            initView(data);
+        }
+    });
+    //初始化页面（从后台取值）
+    function initView(data) {
+        depList = data.data;
+        for(var i = 0 ; i < depList.length ; i++){
+            var dept = depList[i];
+            var liDom = '<tbody>';
+            liDom += '<tr>';
+            liDom += '<td>'+dept.id+'</td>';
+            liDom += '<td>'+dept.name+'</td>';
+            liDom += '<td>'+dept.manager+'</td>';
+            liDom += '<td>400</td>';
+            liDom += '<td>400</td>';
+            liDom += '<td>';
+            liDom += '<a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>';
+            liDom += '<a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>';
+            liDom += '<a class="btn btn-success btn-xs" onclick="deletedepartment('+dept.name+')">删除</a>'
+            liDom += '</td>';
+            liDom += '</tr>';
+            liDom += '</tbody>';
+            $("#q").append(liDom);
+        }
+    }
+    //点击登陆按钮，提交信息
+    $("#submit").click(function(){
+        $.ajax({
+            type:'post',
+            url:'../department/add_department',
+            data:{
+                name:$('#title').val(),
+                manager:$('#author').val()
+            }
+        })
+    })
+
+    function deletedepartment(deptname){
+        $.ajax({
+            type:'post',
+            url:'../department/delete_department',
+            data:{
+                name:deptname
+            }
+        })
+    }
+
+
+</script>
+
