@@ -10,26 +10,19 @@
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label>用户名</label>
-                                        <input type="text" class="form-control"/>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>所属职位</label>
-                                        <select class="form-control">
-                                            <option>人事</option>
-                                            <option>开发</option>
-                                        </select>
+                                        <input type="text" class="form-control" id="typeUsername"/>
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label>当前角色</label>
-                                        <select class="form-control">
-                                            <option>管理员</option>
-                                            <option>普通用户</option>
+                                        <select class="form-control" id="typeRole">
+                                            <option value="1">管理员</option>
+                                            <option value="0">普通用户</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-1"></div>
                                     <div class="form-group col-md-1">
                                         <div style="height: 24px"></div>
-                                        <button type="submit" class="btn btn-success">条件搜索</button>
+                                        <button type="button" class="btn btn-success" onclick="user.render()">条件搜索</button>
                                     </div>
                                     <div class="form-group col-md-1">
                                         <div style="height: 24px"></div>
@@ -110,27 +103,32 @@
                     <form role="form">
                         <div class="form-group">
                             <label>用户名:</label>
-                            <input  class="form-control" placeholder="请输入用户名" />
+                            <input  class="form-control" placeholder="请输入用户名" id="addUsername"/>
                         </div>
                         <div class="form-group">
                             <label>密码:</label>
-                            <input  class="form-control" placeholder="请输入密码" />
+                            <input  class="form-control" placeholder="请输入密码" id="addPassword"/>
                         </div>
                         <div class="form-group">
-                            <label>角色:</label>
-                            <input  class="form-control" placeholder="请输入角色" />
+                            <label>角色</label>
+                            <select class="form-control" id="addRole">
+                                <option value="0">管理员</option>
+                                <option value="1">普通用户</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>职位:</label>
-                            <input  class="form-control" placeholder="请输入职位" />
+                            <input  class="form-control" placeholder="请输入职位" id="addPosition"/>
                         </div>
                         <div class="form-group">
                             <label>状态:</label>
-                            <input  class="form-control" placeholder="请输入状态" />
+                            <select class="form-control" id="addStatus">
+                                <option value="0">在职</option>
+                                <option value="1">离职</option>
+                            </select>
                         </div>
                         <div style="text-align: center;">
-                            <input type="submit"  class="btn btn-success" value="提交" />
-                            <input type="reset"  class="btn btn-default" value="撤销" />
+                            <input type="button"  class="btn btn-success" value="提交"  onclick="user.addUser()"/>
                         </div>
                     </form>
                 </div>
@@ -143,7 +141,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="UpdateUserLab">新增用户</h4>
+                    <h4 class="modal-title" id="UpdateUserLab">更新用户</h4>
                 </div>
                 <div class="modal-body" id="updateUserForm">
 
@@ -162,7 +160,11 @@
 
     function User() {
         this.render = function(){
-            $.get("../user/getAllUser.api",function(res){
+
+            var username = $("#typeUsername").val();
+            var role = $("#typeRole").val();
+
+            $.get("../user/getAllUser.api",{role:role,username:username},function(res){
                 if(null !== res) {
                     var arr = []
                     var num = 1
@@ -190,7 +192,7 @@
                             <td>
                                 <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#UpdateUser" onclick="user.updateUserInfo('${item.id}')">修改</a>
                                 <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal" onclick="user.selectUserById('${item.id}')">查看</a>
-                                <a class="btn btn-success btn-xs">删除</a>
+                                <a class="btn btn-success btn-xs" onclick="user.deleteUser('${item.id}')">删除</a>
                             </td>
                         </tr>
                     `)
@@ -236,7 +238,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>状态:</label>
+                            <label>状态</label>
                             <input  class="form-control" readonly="readonly" value="${res.data.flag}"/>
                         </div>
                     </form>
@@ -252,7 +254,7 @@
             $.post("../user/getOneUser.api",{id:id},function(res) {
                 if (null != res) {
                     var arr = []
-
+                    debugger
                     arr.push(`
                     <form role="form" >
                         <div class="form-group">
@@ -266,8 +268,8 @@
                         <div class="form-group">
                             <label>角色</label>
                             <select class="form-control" id="updateRole">
-                                <option value="0">管理员</option>
-                                <option value="1">普通用户</option>
+                                <option value="1">管理员</option>
+                                <option value="0">普通用户</option>
                             </select>
                         </div>
 
@@ -279,12 +281,12 @@
                         <div class="form-group">
                             <label>状态</label>
                             <select class="form-control" id="updateStatus">
-                                <option value="0">在职</option>
-                                <option value="1">离职</option>
+                                <option value="1">在职</option>
+                                <option value="0">离职</option>
                             </select>
                         </div>
                         <div style="text-align: center;">
-                            <input type="button"  class="btn btn-success" value="修改" onclick="user.updateUser(id)"/>
+                            <input type="button"  class="btn btn-success" value="修改" onclick="user.updateUser('${id}')"/>
                         </div>
                     </form>
                 `)
@@ -301,10 +303,36 @@
             var role = $("#updateRole").val();
             var position = $("#updatePosition").val();
             var flag = $("#updateStatus").val();
-            debugger
             $.post("../user/UpdateUser.api",{username:username,password:password,role:role,position:position,flag:flag,id:id},function(res) {
                 if (null != res) {
                     console.log(res)
+                    toastr.success("修改成功");
+                    user.render()
+                }
+            })
+        }
+
+        this.deleteUser = function (id) {
+            $.get("../user/DeleteUser.api",{id:id},function(res) {
+                if (null != res) {
+                    console.log(res)
+                    toastr.success("删除成功");
+                    user.render()
+                }
+            })
+        }
+
+        this.addUser = function () {
+            var username = $("#addUsername").val();
+            var password = $("#addPassword").val();
+            var role = $("#addRole").val();
+            var position = $("#addPosition").val();
+            var flag = $("#addStatus").val();
+            $.post("../user/AddUser.api",{username:username,password:password,role:role,position:position,flag:flag},function(res) {
+                if (null != res) {
+                    console.log(res)
+                    toastr.success("增加成功");
+                    user.render()
                 }
             })
         }

@@ -49,11 +49,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public ServerResponse selectAllUser() {
+    public ServerResponse selectAllUser(User user) {
 //        PageHelper.startPage(page,rows);
 
         //执行查询
-        List<User> result = userDao.selectAllUser();
+        List<User> result = userDao.selectAllUser(user);
 //
 //        //获取分页信息对象
 //        PageInfo<User> pageInfo = new PageInfo<>(result);
@@ -82,6 +82,16 @@ public class UserServiceImpl implements UserService{
             return ServerResponse.createByErrorMessage("更新失败");
         }
 
+    }
+
+    @Override
+    public ServerResponse deleteUserById(String id) {
+        Integer result = userDao.deleteUserById(id);
+        if(result>0){
+            return  ServerResponse.createBySuccessMessage("删除成功");
+        }else{
+            return ServerResponse.createByErrorMessage("删除失败");
+        }
     }
 
 }

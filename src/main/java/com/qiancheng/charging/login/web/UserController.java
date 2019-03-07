@@ -73,8 +73,8 @@ public class UserController {
 
     @RequestMapping(value="/getAllUser" , method = {RequestMethod.GET})
     @ResponseBody
-    public ServerResponse getAllUser(){
-        return userService.selectAllUser();
+    public ServerResponse getAllUser(User user){
+        return userService.selectAllUser(user);
     }
 
 
@@ -89,4 +89,17 @@ public class UserController {
     public ServerResponse UpdateUserById(User user){
         return userService.updateUserById(user);
     }
+
+    @RequestMapping(value="/DeleteUser" , method = {RequestMethod.GET})
+    @ResponseBody
+    public ServerResponse DeleteUserById(String id){
+        return userService.deleteUserById(id);
+    }
+
+    @RequestMapping(value="/AddUser" , method = {RequestMethod.POST})
+    @ResponseBody
+    public ServerResponse AddUser(User user){
+        return userService.register(user);
+    }
+
 }
