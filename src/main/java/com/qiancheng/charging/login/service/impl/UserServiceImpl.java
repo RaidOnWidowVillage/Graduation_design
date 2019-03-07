@@ -1,15 +1,11 @@
 package com.qiancheng.charging.login.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.qiancheng.charging.common.ServerResponse;
-import com.qiancheng.charging.entity.Position;
 import com.qiancheng.charging.login.dao.UserDao;
 import com.qiancheng.charging.entity.User;
 import com.qiancheng.charging.login.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 

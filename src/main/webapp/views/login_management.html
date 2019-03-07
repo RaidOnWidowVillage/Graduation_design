@@ -92,28 +92,7 @@
                     <h4 class="modal-title" id="myModalLabel">查看用户详细信息</h4>
                 </div>
                 <div class="modal-body" id="XiangQingUser">
-                    <form role="form">
-                        <div class="form-group">
-                            <label>用户名:</label>
-                            <input  class="form-control" placeholder="请输入用户名" />
-                        </div>
-                        <div class="form-group">
-                            <label>密码:</label>
-                            <input  class="form-control" placeholder="请输入密码" />
-                        </div>
-                        <div class="form-group">
-                            <label>角色:</label>
-                            <input  class="form-control" placeholder="请输入角色" />
-                        </div>
-                        <div class="form-group">
-                            <label>职位:</label>
-                            <input  class="form-control" placeholder="请输入职位" />
-                        </div>
-                        <div class="form-group">
-                            <label>状态:</label>
-                            <input  class="form-control" placeholder="请输入状态" />
-                        </div>
-                    </form>
+
                 </div>
                 <div class="modal-footer"></div>
             </div>
@@ -166,33 +145,8 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="UpdateUserLab">新增用户</h4>
                 </div>
-                <div class="modal-body">
-                    <form role="form">
-                        <div class="form-group">
-                            <label>用户名:</label>
-                            <input  class="form-control" placeholder="请输入用户名" />
-                        </div>
-                        <div class="form-group">
-                            <label>密码:</label>
-                            <input  class="form-control" placeholder="请输入密码" />
-                        </div>
-                        <div class="form-group">
-                            <label>角色:</label>
-                            <input  class="form-control" placeholder="请输入角色" />
-                        </div>
-                        <div class="form-group">
-                            <label>职位:</label>
-                            <input  class="form-control" placeholder="请输入职位" />
-                        </div>
-                        <div class="form-group">
-                            <label>状态:</label>
-                            <input  class="form-control" placeholder="请输入状态" />
-                        </div>
-                        <div style="text-align: center;">
-                            <input type="submit"  class="btn btn-success" value="提交" />
-                            <input type="reset"  class="btn btn-default" value="撤销" />
-                        </div>
-                    </form>
+                <div class="modal-body" id="updateUserForm">
+
                 </div>
                 <div class="modal-footer"></div>
             </div>
@@ -231,10 +185,10 @@
                             <td>${num}</td>
                             <td>${item.username}</td>
                             <td>${item.role}</td>
-                            <td>${item.positionId}</td>
+                            <td>${item.position}</td>
                             <td>${item.flag}</td>
                             <td>
-                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#UpdateUser" ">修改</a>
+                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#UpdateUser" onclick="user.updateUserInfo('${item.id}')">修改</a>
                                 <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal" onclick="user.selectUserById('${item.id}')">查看</a>
                                 <a class="btn btn-success btn-xs">删除</a>
                             </td>
@@ -276,10 +230,10 @@
                             <input  class="form-control" readonly="readonly" value="${res.data.role}"/>
                         </div>
 
-                        <select class="form-control">
-                            <option>管理员</option>
-                            <option>普通用户</option>
-                        </select>
+                        <div class="form-group">
+                            <label>职位:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.position}"/>
+                        </div>
 
                         <div class="form-group">
                             <label>状态:</label>
@@ -289,64 +243,68 @@
                 `)
 
                 document.getElementById('XiangQingUser').innerHTML = arr.join('')
+                document.getElementById('selectRole')[res.data.role].selected=true;
                 }
             })
         }
 
-        this.updateUser = function (id) {
+        this.updateUserInfo = function (id) {
             $.post("../user/getOneUser.api",{id:id},function(res) {
                 if (null != res) {
                     var arr = []
 
-                    if(res.data.role===1){
-                        res.data.role="管理员"
-                    }else{
-                        res.data.role="普通用户"
-                    }
-
-                    if(res.data.flag===1){
-                        res.data.flag="在职"
-                    }else{
-                        res.data.flag="离职"
-                    }
-
                     arr.push(`
-                    <form role="form">
+                    <form role="form" >
                         <div class="form-group">
                             <label>用户名:</label>
-                            <input  class="form-control"  value="${res.data.username}"/>
+                            <input id="updateUsername" class="form-control"  value="${res.data.username}"/>
                         </div>
                         <div class="form-group">
                             <label>密码:</label>
-                            <input  class="form-control"  value="${res.data.username}"/>
+                            <input id="updatePassword"  class="form-control"  value="${res.data.password}"/>
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group">
                             <label>角色</label>
-                            <select class="form-control">
-                                <option>管理员</option>
-                                <option>普通用户</option>
+                            <select class="form-control" id="updateRole">
+                                <option value="0">管理员</option>
+                                <option value="1">普通用户</option>
                             </select>
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group">
                             <label>职位</label>
-                            <select class="form-control">
-                                <option>管理员</option>
-                                <option>普通用户</option>
-                            </select>
+                            <input id="updatePosition"  class="form-control"  value="${res.data.position}"/>
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group">
                             <label>状态</label>
-                            <select class="form-control">
-                                <option>在职</option>
-                                <option>离职</option>
+                            <select class="form-control" id="updateStatus">
+                                <option value="0">在职</option>
+                                <option value="1">离职</option>
                             </select>
+                        </div>
+                        <div style="text-align: center;">
+                            <input type="button"  class="btn btn-success" value="修改" onclick="user.updateUser(id)"/>
                         </div>
                     </form>
                 `)
 
-                    document.getElementById('XiangQingUser').innerHTML = arr.join('')
+                    document.getElementById('updateUserForm').innerHTML = arr.join('')
+                }
+            })
+        }
+        
+        
+        this.updateUser = function (id) {
+            var username = $("#updateUsername").val();
+            var password = $("#updatePassword").val();
+            var role = $("#updateRole").val();
+            var position = $("#updatePosition").val();
+            var flag = $("#updateStatus").val();
+            debugger
+            $.post("../user/UpdateUser.api",{username:username,password:password,role:role,position:position,flag:flag,id:id},function(res) {
+                if (null != res) {
+                    console.log(res)
                 }
             })
         }

@@ -1,7 +1,6 @@
 package com.qiancheng.charging.employee.entity;
 
 import com.qiancheng.charging.entity.Department;
-import com.qiancheng.charging.entity.Position;
 import com.qiancheng.charging.entity.Salary;
 
 public class EmployeeBO {
@@ -14,7 +13,7 @@ public class EmployeeBO {
     private int status; //工作状态
     private String contact; //应急联系人
     private Department department;
-    private Position position;
+    private String position;
     private Salary salary;
 
     public String getId() {
@@ -89,11 +88,11 @@ public class EmployeeBO {
         this.department = department;
     }
 
-    public Position getPosition() {
+    public String getPosition() {
         return position;
     }
 
-    public void setPosition(Position position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 

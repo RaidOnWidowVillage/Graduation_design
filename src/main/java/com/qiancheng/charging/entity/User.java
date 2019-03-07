@@ -8,7 +8,7 @@ public class User {
     private String password; //密码
     private int role; //角色 0普通用户 1管理员
     private int flag;
-    private String positionId; //职位id
+    private String position; //职位
     private Date createTime;
     private Date updateTime;
     private String createUser;
@@ -19,13 +19,13 @@ public class User {
 
     }
 
-    public User(String id, String username, String password, int role, int flag, String positionId, Date createTime, Date updateTime, String createUser, String updateUser, Date lastLoginTime) {
+    public User(String id, String username, String password, int role, int flag, String position, Date createTime, Date updateTime, String createUser, String updateUser, Date lastLoginTime) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
         this.flag = flag;
-        this.positionId = positionId;
+        this.position = position;
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.createUser = createUser;
@@ -73,12 +73,12 @@ public class User {
         this.flag = flag;
     }
 
-    public String getPositionId() {
-        return positionId;
+    public String getPosition() {
+        return position;
     }
 
-    public void setPositionId(String positionId) {
-        this.positionId = positionId;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public Date getCreateTime() {
