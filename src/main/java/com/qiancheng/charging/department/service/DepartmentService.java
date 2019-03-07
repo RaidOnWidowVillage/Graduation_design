@@ -3,6 +3,7 @@ package com.qiancheng.charging.department.service;
 import com.qiancheng.charging.common.ServerResponse;
 import com.qiancheng.charging.entity.Department;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface DepartmentService {
@@ -15,5 +16,5 @@ public interface DepartmentService {
     //查询部门信息
     ServerResponse <List> queryAllDepartment();
     //按照部门名称查询部门信息
-//    ServerResponse <Department> queryByName(String name);
+    ServerResponse<List> queryBy(Department dep);
 }
