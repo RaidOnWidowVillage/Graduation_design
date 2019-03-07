@@ -18,15 +18,15 @@
                                         <select class="form-control" id="jinli">
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-2">
-                                        <label>部门创建时间</label>
-                                        <input type="date" class="form-control">
-                                    </div>
+                                    <!--<div class="form-group col-md-2">-->
+                                        <!--<label>部门创建时间</label>-->
+                                        <!--<input type="date" class="form-control" id="chuangjianshijian">-->
+                                    <!--</div>-->
                                     <div class="form-group col-md-2">
                                     </div>
                                     <div class="form-group col-md-1">
                                         <div style="height: 24px"></div>
-                                        <button type="submit" class="btn btn-success">条件搜索</button>
+                                        <button type="button" class="btn btn-success" onclick="search()">条件搜索</button>
                                     </div>
                                     <div class="form-group col-md-1">
                                         <div style="height: 24px"></div>
@@ -96,12 +96,27 @@
 <script src="../resources/assets/js/admin_include.js"></script>
 <script type="text/javascript">
     $(function(){
-        $(".form-control").empty();
+        var bumenname = $("#bumen").val();
+        var jinliname = $("#jinli").val();
+        // var chuangjianshijian = $("#chuangjianshijian").val();
+        if(bumenname == null && jinliname == null){
+            first();
+        }
+    })
+
+    function first(){
+        $.ajax({
+            type: 'post',
+            url: "../department/select_department",
+            success: function (data) {
+                initView(data);
+            }
+        })
         $.ajax({
             type:'post',
             url:"../department/select_department",
             success:function (data) {
-                $(".form-control").append("<option value='-1'>--请选择--</option>");
+                $(".form-control").append("<option value=''>--请选择--</option>");
                 depList = data.data;
                 for(var i = 0;i < depList.length ; i++){
                     var dep = depList[i];
@@ -110,38 +125,41 @@
                     $("#bumen").append("<option value='"+dep.name+"'>"+kindname+"</option>");
                     $("#jinli").append("<option value='"+dep.manager+"'>"+managername+"</option>");
                 }
-
             }
         });
-    })
-
-    function queryBy(){
-        $("#bumen").change(function(){
-            var bumenname = $("#bumen").val();
-        })
-        $("#jinli").change(function(){
-            var jinliname = $("#jinli").val();
-        })
+    }
+    function search(){
+        var bumenname = $("#bumen").val();
+        var jinliname = $("#jinli").val();
+        if(bumenname == "" && jinliname == ""){
+            first();
+            return;
+        }
+        $.ajax({
+            type:'post',
+            url:"../department/queryby",
+            data:{
+                name:bumenname,
+                manager:jinliname,
+            },
+            success:function (data) {
+                initView(data);
+            }
+        });
     }
 
-    $.ajax({
-        type:'post',
-        url:"../department/select_department",
-        success:function (data) {
-            initView(data);
-        }
-    });
     //初始化页面（从后台取值）
     function initView(data) {
+        $("#ddd").empty();
         depList = data.data;
         for(var i = 0 ; i < depList.length ; i++){
             var dept = depList[i];
             var liDom = '<tr id="tr_'+dept.id+'">';
-            liDom += '<td>'+dept.id+'</td>';
+            liDom += '<td>'+(i+1)+'</td>';
             liDom += '<td>'+dept.name+'</td>';
             liDom += '<td>'+dept.manager+'</td>';
             liDom += '<td>400</td>';
-            liDom += '<td>400</td>';
+            liDom += '<td>'+dept.createTime+'</td>';
             liDom += '<td>';
             liDom += "<a class='btn btn-success btn-xs' data-toggle='modal' data-target='#myModal' onclick='change("+"\""+dept.id+"\""+","+"\""+dept.name+"\""+","+"\""+dept.manager+"\""+")'>修改</a>";
             liDom += "<a class='btn btn-success btn-xs' data-toggle='modal' data-target='#myModal' onclick='look("+"\""+dept.name+"\""+","+"\""+dept.manager+"\""+")'>查看</a>";

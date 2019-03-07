@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.sql.Date;
+
 @Controller
 @RequestMapping("/department")
 public class DepartmentController {
@@ -48,5 +50,13 @@ public class DepartmentController {
     @ResponseBody
     public ServerResponse selectDepartment(){
         return  departmentService.queryAllDepartment();
+    }
+    @RequestMapping(value="/queryby" , method = {RequestMethod.POST})
+    @ResponseBody
+    public ServerResponse queryby(Department depts){
+        depts.setUpdateUser("yananding");
+        String name = depts.getName();
+        String manager = depts.getManager();
+        return  departmentService.queryBy(depts);
     }
 }
