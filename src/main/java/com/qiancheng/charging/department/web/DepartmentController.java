@@ -26,24 +26,18 @@ public class DepartmentController {
     public ServerResponse addDepartment(Department dep){
         dep.setCreateUser("yananding");
         dep.setUpdateUser("yananding");
-        String name = dep.getName();
-        String manager = dep.getManager();
         return departmentService.addDepartment(dep);
     }
     @RequestMapping(value="/delete_department" , method = {RequestMethod.POST})
     @ResponseBody
     public ServerResponse deleteDepartment(Department dep){
         dep.setUpdateUser("yananding");
-        String id = dep.getId();
         return departmentService.deleteDepartment(dep);
     }
     @RequestMapping(value="/update_department" , method = {RequestMethod.POST})
     @ResponseBody
     public ServerResponse updateDepartment(Department dep){
         dep.setUpdateUser("yananding");
-        String id = dep.getId();
-        String name = dep.getName();
-        String manager = dep.getManager();
         return departmentService.updateDepartment(dep);
     }
     @RequestMapping(value="/select_department" , method = {RequestMethod.POST})
@@ -53,10 +47,8 @@ public class DepartmentController {
     }
     @RequestMapping(value="/queryby" , method = {RequestMethod.POST})
     @ResponseBody
-    public ServerResponse queryby(Department depts){
+    public ServerResponse querybyname(Department depts){
         depts.setUpdateUser("yananding");
-        String name = depts.getName();
-        String manager = depts.getManager();
-        return  departmentService.queryBy(depts);
+        return departmentService.queryBy(depts);
     }
 }

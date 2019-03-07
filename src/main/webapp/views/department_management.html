@@ -82,7 +82,7 @@
                             <input id = "author" class="form-control" placeholder="请输入部门经理" />
                         </div>
                         <div style="text-align: center;">
-                            <input type="button"  id="suu" class="btn btn-success" value="提交" />
+                            <input type="submit"  id="suu" class="btn btn-success" value="提交" />
                             <input type="button" id="re" class="btn btn-default" onclick="reset()" value="撤销" />
                         </div>
                     </form>
@@ -112,6 +112,8 @@
                 initView(data);
             }
         })
+        $("#bumen").empty();
+        $("#jinli").empty();
         $.ajax({
             type:'post',
             url:"../department/select_department",
@@ -127,7 +129,9 @@
                 }
             }
         });
+
     }
+    //搜索
     function search(){
         var bumenname = $("#bumen").val();
         var jinliname = $("#jinli").val();
@@ -223,6 +227,7 @@
                 data:{
                     id:id
                 },
+                success:first,
             })
             $("#tr_"+id).remove();
         }else{
@@ -236,14 +241,18 @@
         $("#suu").attr("value","修改");
         $("#myModalLabel").text("修改部门")
         $("#title").attr('placeholder',name);
+        $("#title").attr('value',name);
         $("#title").attr('disabled',false);
         $("#author").attr('placeholder',manager);
+        $("#author").attr('value',manager);
         $("#author").attr('disabled',false);
         $("#suu").click(function(){
             update(id);
         })
     }
     function update(id){
+        var bumen = $('#title').val();
+        var jinli = $('#author').val()
         if(confirm("确定要修改吗？")){
             window.event.returnValue = true;
         }else{
@@ -261,9 +270,7 @@
             })
             $("#myModal").hide();
         }else{
-
         }
-
     }
     //查看部门
     function look(name,manager){

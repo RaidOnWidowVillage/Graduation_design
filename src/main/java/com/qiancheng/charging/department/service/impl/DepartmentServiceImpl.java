@@ -1,13 +1,12 @@
 package com.qiancheng.charging.department.service.impl;
 
 import com.qiancheng.charging.common.ServerResponse;
-import com.qiancheng.charging.entity.Department;
 import com.qiancheng.charging.department.dao.DepartmentDao;
+import com.qiancheng.charging.entity.Department;
 import com.qiancheng.charging.department.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -62,11 +61,13 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public ServerResponse queryBy(Department dep) {
-        List<Department> deps = departmentDao.queryby_hr_department(dep.getName(),dep.getManager());
+        String name = dep.getName();
+        String manager = dep.getManager();
+        List<Department> deps = departmentDao.queryby_hr_department(name, manager);
         if (deps != null) {
-            return ServerResponse.createBySuccess("查询成功",deps);
+            return ServerResponse.createBySuccess("查询部门成功",deps);
         } else {
-            return ServerResponse.createByErrorMessage("查询失败");
+            return ServerResponse.createByErrorMessage("查询部门失败");
         }
     }
 

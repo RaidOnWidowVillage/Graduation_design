@@ -3,7 +3,6 @@ package com.qiancheng.charging.department.service;
 import com.qiancheng.charging.common.ServerResponse;
 import com.qiancheng.charging.entity.Department;
 
-import java.sql.Date;
 import java.util.List;
 
 public interface DepartmentService {

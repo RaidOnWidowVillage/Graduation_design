@@ -1,7 +1,317 @@
-<div>
-薪资管理
+<div style="width: 98%;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">薪资信息管理</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form role="form">
+                                <div class="row">
+                                    <div class="form-group col-md-2">
+                                        <label>薪资名称</label>
+                                        <select class="form-control" id="xinziname">
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                    </div>
+                                    <div class="form-group col-md-1">
+                                        <div style="height: 24px"></div>
+                                        <button type="button" class="btn btn-success" onclick="search()">搜索</button>
+                                    </div>
+                                    <div class="form-group col-md-1">
+                                        <div style="height: 24px"></div>
+                                        <button type="reset" class="btn btn-success" data-toggle="modal" data-target="#salaryModal" onclick="add()">创建薪资</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- 搜索条件 -->
+                            <hr />
+                            <!-- 表格&分页 -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">薪资数据</div>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>编号</th>
+                                                <th>薪资名称</th>
+                                                <th>基本工资</th>
+                                                <th>保险</th>
+                                                <th>公积金</th>
+                                                <th>个人所得税</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="sss">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" style="top:100px;" id="salaryModal" tabindex="-1" role="dialog" aria-labelledby="salaryModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="salaryModalLabel">创建薪资</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>薪资名称:</label>
+                            <input id = "salaryname" class="form-control" placeholder="请输入薪资名称" />
+                        </div>
+                        <div class="form-group">
+                            <label>基本工资:</label>
+                            <input id = "basticsalary" class="form-control" placeholder="请输入基本工资" />
+                        </div>
+                        <div class="form-group">
+                            <label>保险:</label>
+                            <input id = "safe" class="form-control" placeholder="请输入保险" />
+                        </div>
+                        <div class="form-group">
+                            <label>公积金:</label>
+                            <input id = "found" class="form-control" placeholder="请输入公积金" />
+                        </div>
+                        <div class="form-group">
+                            <label>个人所得税:</label>
+                            <input id = "tax" class="form-control" placeholder="请输入个人所得税" />
+                        </div>
+                        <div style="text-align: center;">
+                            <input type="submit"  id="up" class="btn btn-success" value="提交" />
+                            <input type="button" id="cancle" class="btn btn-default" onclick="reset()" value="撤销" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<script>
+<script src="../resources/assets/js/admin_include.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var xinzinamename = $("#xinziname").val();
+        if(xinzinamename == null){
+            first();
+        }
+    })
 
+    function first(){
+        $.ajax({
+            type: 'post',
+            url: "../salary/select_salary",
+            success: function (data) {
+                initView(data);
+            }
+        })
+        $("#xinziname").empty();
+        $.ajax({
+            type:'post',
+            url:"../salary/select_salary",
+            success:function (data) {
+                $(".form-control").append("<option value=''>--请选择--</option>");
+                salList = data.data;
+                for(var i = 0;i < salList.length ; i++){
+                    var sal = salList[i];
+                    var kindname = sal.name;
+                    $("#xinziname").append("<option value='"+sal.name+"'>"+kindname+"</option>");
+                }
+            }
+        });
+
+    }
+    //搜索
+    function search(){
+        var xinzinamename = $("#xinziname").val();
+        if(xinzinamename == ""){
+            first();
+            return;
+        }
+        $.ajax({
+            type:'post',
+            url:"../salary/querybyname",
+            data:{
+                name:xinzinamename,
+            },
+            success:function (data) {
+                initView(data);
+            }
+        });
+    }
+
+    //初始化页面（从后台取值）
+    function initView(data) {
+        $("#sss").empty();
+        salList = data.data;
+        for(var i = 0 ; i < salList.length ; i++){
+            var sal = salList[i];
+            var liDom = '<tr id="sal_'+sal.id+'">';
+            liDom += '<td>'+(i+1)+'</td>';
+            liDom += '<td>'+sal.name+'</td>';
+            liDom += '<td>'+sal.basicSalary+'</td>';
+            liDom += '<td>'+sal.safe+'</td>';
+            liDom += '<td>'+sal.fund+'</td>';
+            liDom += '<td>'+sal.tax+'</td>';
+            liDom += '<td>';
+            liDom += "<a class='btn btn-success btn-xs' data-toggle='modal' data-target='#salaryModal' onclick='change("+"\""+sal.id+"\""+","+"\""+sal.name+"\""+","+"\""+sal.basicSalary+"\""+","+"\""+sal.safe+"\""+","+"\""+sal.fund+"\""+","+"\""+sal.tax+"\""+")'>修改</a>";
+            liDom += "<a class='btn btn-success btn-xs' data-toggle='modal' data-target='#salaryModal' onclick='look("+"\""+sal.id+"\""+","+"\""+sal.name+"\""+","+"\""+sal.basicSalary+"\""+","+"\""+sal.safe+"\""+","+"\""+sal.fund+"\""+","+"\""+sal.tax+"\""+")')'>查看</a>";
+            liDom += "<a class='btn btn-success btn-xs' onclick='deletea("+"\""+sal.id+"\""+")'>删除</a>"
+            liDom += '</td>';
+            liDom += '</tr>';
+            $("#sss").append(liDom);
+        }
+    }
+    //创建部门模块变化
+    function add() {
+        $("#up").show();
+        $("#up").attr("value","提交");
+        $("#cancle").show();
+        $("#salaryModalLabel").text("创建薪资")
+        $("#salaryname").attr('placeholder','请输入薪资名称');
+        $("#salaryname").attr('disabled',false);
+        $("#basticsalary").attr('placeholder','请输入基本工资');
+        $("#basticsalary").attr('disabled',false);
+        $("#safe").attr('placeholder','请输入保险');
+        $("#safe").attr('disabled',false);
+        $("#found").attr('placeholder','请输入公积金');
+        $("#found").attr('disabled',false);
+        $("#tax").attr('placeholder','请输入个人所得税');
+        $("#tax").attr('disabled',false);
+        $("#up").click(function () {
+            closedialog();
+        })
+    }
+    //点击提交按钮，提交部门信息
+    function closedialog(){
+        if(confirm("确定要提交吗？")){
+            window.event.returnValue = true;
+        }else{
+            window.event.returnValue = false;
+        }
+        if(window.event.returnValue == true){
+            $.ajax({
+                type:'post',
+                url:'../salary/add_salary',
+                data:{
+                    name:$('#salaryname').val(),
+                    basicSalary:$('#basticsalary').val(),
+                    safe:$('#safe').val(),
+                    fund:$('#found').val(),
+                    tax:$('#tax').val(),
+                }
+            })
+            $("#salaryModal").hide();
+        }else{
+
+        }
+    }
+    //撤销功能
+    function reset(){
+        $('#salaryname').val("");
+        $('#basticsalary').val("");
+        $('#safe').val("");
+        $('#found').val("");
+        $('#tax').val("");
+    }
+    //删除部门功能
+    function deletea(id){
+        if(confirm("确定要删除吗？")){
+            window.event.returnValue = true;
+        }else{
+            window.event.returnValue = false;
+        }
+        if(window.event.returnValue == true){
+            $.ajax({
+                type:'post',
+                url:'../salary/delete_salary',
+                data:{
+                    id:id
+                },
+                success:first,
+            })
+            $("#sal_"+id).remove();
+        }else{
+
+        }
+    }
+    //修改部门
+    function change(id,name,basicsalary,safe,fund,tax){
+        $("#up").show();
+        $("#cancle").show();
+        $("#up").attr("value","修改");
+        $("#salaryModalLabel").text("修改薪资")
+        $("#salaryname").attr('placeholder',name);
+        $("#salaryname").attr('value',name);
+        $("#salaryname").attr('disabled',false);
+        $("#basticsalary").attr('placeholder',basicsalary);
+        $("#basticsalary").attr('value',basicsalary);
+        $("#basticsalary").attr('disabled',false);
+        $("#safe").attr('placeholder',safe);
+        $("#safe").attr('value',safe);
+        $("#safe").attr('disabled',false);
+        $("#found").attr('placeholder',fund);
+        $("#found").attr('value',fund);
+        $("#found").attr('disabled',false);
+        $("#tax").attr('placeholder',tax);
+        $("#tax").attr('value',tax);
+        $("#tax").attr('disabled',false);
+        $("#up").click(function(){
+            update(id);
+        })
+    }
+    function update(id){
+        var salaryname = $('#salaryname').val();
+        var basticsalary = $('#basticsalary').val();
+        var safe = $('#safe').val();
+        var found = $('#found').val();
+        var tax = $('#tax').val();
+        if(confirm("确定要修改吗？")){
+            window.event.returnValue = true;
+        }else{
+            window.event.returnValue = false;
+        }
+        if(window.event.returnValue == true){
+            $.ajax({
+                type:'post',
+                url:'../salary/update_salary',
+                data:{
+                    id:id,
+                    name:$('#salaryname').val(),
+                    basicSalary:$('#basticsalary').val(),
+                    safe:$('#safe').val(),
+                    fund:$('#found').val(),
+                    tax:$('#tax').val(),
+                }
+            })
+            $("#salaryModal").hide();
+        }else{
+        }
+    }
+    //查看部门
+    function look(id,name,basicsalary,safe,fund,tax){
+        $("#up").hide();
+        $("#cancle").hide();
+        $("#salaryname").attr('placeholder',name);
+        $("#salaryname").attr('disabled',true);
+        $("#basticsalary").attr('placeholder',basicsalary);
+        $("#basticsalary").attr('disabled',true);
+        $("#safe").attr('placeholder',safe);
+        $("#safe").attr('disabled',true);
+        $("#found").attr('placeholder',fund);
+        $("#found").attr('disabled',true);
+        $("#tax").attr('placeholder',tax);
+        $("#tax").attr('disabled',true);
+        $("#salaryModalLabel").text("查看薪资")
+    }
 </script>
+
