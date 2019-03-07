@@ -10,7 +10,7 @@ public class Employee {
     private String email; //email
     private String address; //地址
     private String departmentId; //部门id
-    private String positionId; //职位id
+    private String position; //职位id
     private int status; //工作状态
     private String salaryId; //薪资id
     private Date createTime;
@@ -23,7 +23,7 @@ public class Employee {
 
     }
 
-    public Employee(String id, String name, int gender, String phone, String email, String address, String departmentId, String positionId, int status, String salaryId, Date createTime, Date updateTime, String createUser, String updateUser,String contact) {
+    public Employee(String id, String name, int gender, String phone, String email, String address, String departmentId, String position, int status, String salaryId, Date createTime, Date updateTime, String createUser, String updateUser,String contact) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -31,7 +31,7 @@ public class Employee {
         this.email = email;
         this.address = address;
         this.departmentId = departmentId;
-        this.positionId = positionId;
+        this.position = position;
         this.status = status;
         this.salaryId = salaryId;
         this.createTime = createTime;
@@ -97,12 +97,12 @@ public class Employee {
         this.departmentId = departmentId;
     }
 
-    public String getPositionId() {
-        return positionId;
+    public String getPosition() {
+        return position;
     }
 
-    public void setPositionId(String positionId) {
-        this.positionId = positionId;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public int getStatus() {

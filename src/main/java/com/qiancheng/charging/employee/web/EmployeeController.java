@@ -39,7 +39,7 @@ public class EmployeeController {
     public ServerResponse UpdateEmployee(Employee employee){
         employee.setUpdateUser("jayne");//设置修改者
         //数据验证
-        if(employee.getId()==null&&employee.getName()==null&&employee.getPhone()==null&&employee.getAddress()==null&&employee.getDepartmentId()==null&&employee.getPositionId()==null&&employee.getSalaryId()==null&&employee.getSalaryId()==null){
+        if(employee.getId()==null&&employee.getName()==null&&employee.getPhone()==null&&employee.getAddress()==null&&employee.getDepartmentId()==null&&employee.getPosition()==null&&employee.getSalaryId()==null&&employee.getSalaryId()==null){
             return ServerResponse.createByErrorMessage("参数错误");
         }else{
             return employeeService.updateEmploy(employee);
@@ -50,7 +50,15 @@ public class EmployeeController {
     //查询员工信息
     @RequestMapping(value="/select_all_employee" , method = {RequestMethod.GET})
     @ResponseBody
-    public ServerResponse SelectAllEmployee(){
-        return employeeService.selectAllEmploy();
+    public ServerResponse SelectAllEmployee(Employee employee){
+
+        return employeeService.selectAllEmploy(employee);
+    }
+
+    //查询员工信息
+    @RequestMapping(value="/select_one_employee" , method = {RequestMethod.GET})
+    @ResponseBody
+    public ServerResponse SelectOneEmployee(String id){
+        return employeeService.selectOneEmployee(id);
     }
 }

@@ -10,40 +10,31 @@
                                 <div class="row">
                                     <div class="form-group col-md-2">
                                         <label>姓名</label>
-                                        <input type="text" class="form-control"/>
+                                        <input type="text" class="form-control" id="employeeName"/>
                                     </div>
                                     <div class="form-group col-md-1">
                                         <label>性别</label>
-                                        <select class="form-control">
-                                            <option>男</option>
-                                            <option>女</option>
+                                        <select class="form-control" id="employeeGender">
+                                            <option value="1">男</option>
+                                            <option value="2">女</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label>所属部门</label>
-                                        <select class="form-control">
-                                            <option>项目部</option>
-                                            <option>财务部</option>
+                                        <select class="form-control" id="employeeBumen">
                                         </select>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label>所属职位</label>
-                                        <select class="form-control">
-                                            <option>人事</option>
-                                            <option>开发</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-1">
                                         <label>当前状态</label>
-                                        <select class="form-control">
-                                            <option>请假</option>
-                                            <option>出差</option>
+                                        <select class="form-control" id="employeeStatus">
+                                            <option value="1">请假</option>
+                                            <option value="2">出差</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-1"></div>
                                     <div class="form-group col-md-1">
                                         <div style="height: 24px"></div>
-                                        <button type="submit" class="btn btn-success">条件搜索</button>
+                                        <button type="button" class="btn btn-success" onclick="employee.render()">条件搜索</button>
                                     </div>
                                 </div>
                             </form>
@@ -61,119 +52,12 @@
                                                 <th>姓名</th>
                                                 <th>性别</th>
                                                 <th>联系电话</th>
-                                                <th>应急联系电话</th>
                                                 <th>所属部门</th>
-                                                <th>所属职位</th>
                                                 <th>状态</th>
                                                 <th>操作</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>阿莫西林</td>
-                                                <td>25.0</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
-                                                    <a class="btn btn-success btn-xs">删除</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>鼻严康</td>
-                                                <td>26.0</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
-                                                    <a class="btn btn-success btn-xs">删除</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>胃舒宁</td>
-                                                <td>22.0</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
-                                                    <a class="btn btn-success btn-xs">删除</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>心必治</td>
-                                                <td>38.0</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
-                                                    <a class="btn btn-success btn-xs">删除</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>骨立康</td>
-                                                <td>14.0</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
-                                                    <a class="btn btn-success btn-xs">删除</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>肠安宁</td>
-                                                <td>19.0</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
-                                                    <a class="btn btn-success btn-xs">删除</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>肠安宁</td>
-                                                <td>19.0</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
-                                                    <a class="btn btn-success btn-xs">删除</a>
-                                                </td>
-                                            </tr>
+                                            <tbody id="employeeListBody">
                                             </tbody>
                                         </table>
                                     </div>
@@ -192,53 +76,8 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel">查看员工详细信息</h4>
                 </div>
-                <div class="modal-body">
-                    <form role="form">
-                        <div class="form-group">
-                            <label>姓名:</label>
-                            <input  class="form-control" placeholder="请输入部门名称" />
-                        </div>
-                        <div class="form-group">
-                            <label>性别:</label>
-                            <input  class="form-control" placeholder="请输入部门经理" />
-                        </div>
-                        <div class="form-group">
-                            <label>联系电话:</label>
-                            <input  class="form-control" placeholder="请输入部门经理" />
-                        </div>
-                        <div class="form-group">
-                            <label>应急联系电话:</label>
-                            <input  class="form-control" placeholder="请输入部门经理" />
-                        </div>
-                        <div class="form-group">
-                            <label>E-mail:</label>
-                            <input  class="form-control" placeholder="请输入部门经理" />
-                        </div>
-                        <div class="form-group">
-                            <label>家庭住址:</label>
-                            <input  class="form-control" placeholder="请输入部门经理" />
-                        </div>
-                        <div class="form-group">
-                            <label>所属部门:</label>
-                            <input  class="form-control" placeholder="请输入部门经理" />
-                        </div>
-                        <div class="form-group">
-                            <label>所属职位:</label>
-                            <input  class="form-control" placeholder="请输入部门经理" />
-                        </div>
-                        <div class="form-group">
-                            <label>薪酬:</label>
-                            <input  class="form-control" placeholder="请输入部门经理" />
-                        </div>
-                        <div class="form-group">
-                            <label>当前状态:</label>
-                            <input  class="form-control" placeholder="请输入部门经理" />
-                        </div>
-                        <div style="text-align: center;">
-                            <input type="button"  class="btn btn-success" value="提交" />
-                            <input type="button"  class="btn btn-default" value="撤销" />
-                        </div>
-                    </form>
+                <div class="modal-body" id="employeeInfo">
+
                 </div>
                 <div class="modal-footer"></div>
             </div>
@@ -247,3 +86,163 @@
 </div>
 
 <script src="../resources/assets/js/admin_include.js"></script>
+<script>
+    $(function () {
+        employee.render();
+
+        $.ajax({
+            type:'post',
+            url:"../department/select_department",
+            success:function (data) {
+                    depList = data.data;
+                for(var i = 0;i < depList.length ; i++){
+                    var dep = depList[i];
+                    var kindname = dep.name;
+                    $("#employeeBumen").append("<option value='"+dep.id+"'>"+kindname+"</option>");
+                }
+
+            }
+        });
+    })
+
+    function Employee() {
+        this.render = function () {
+            debugger
+            var name = $("#employeeName").val();
+            var gender = $("#employeeGender").val();
+            var departmentId = $("#employeeBumen").val();
+            var status = $("#employeeStatus").val();
+
+            $.get("../employee/select_all_employee.api", {gender: gender, name: name, departmentId: departmentId, status: status}, function (res) {
+                if (null !== res) {
+                    var arr = []
+                    var num = 1
+                    var department
+                    res.data.forEach(function (item) {
+
+                        if (item.gender === 1) {
+                            item.gender = "男"
+                        } else {
+                            item.gender = "女"
+                        }
+
+                        if (item.status === 1) {
+                            item.status = "在职"
+                        } else {
+                            item.status = "离职"
+                        }
+
+                        department = item.department;
+                        if(department === null){
+                           var bumen = "待定"
+                        }else{
+                            var bumen = department.name
+                        }
+
+
+                        arr.push(`
+
+                        <tr>
+                            <td>${num}</td>
+                            <td>${item.name}</td>
+                            <td>${item.gender}</td>
+                            <td>${item.phone}</td>
+                            <td>${bumen}</td>
+                            <td>${item.status}</td>
+                            <td>
+                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
+                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal" onclick="employee.getOneInfo('${item.id}')">查看</a>
+                                <a class="btn btn-success btn-xs">删除</a>
+                            </td>
+                        </tr>
+                    `)
+                        num++;
+                    })
+                    document.getElementById('employeeListBody').innerHTML = arr.join('')
+                }
+            })
+        }
+
+        this.getOneInfo = function (id) {
+            $.get("../employee/select_one_employee.api", {id:id}, function (res) {
+                if (null != res) {
+                    var arr = []
+
+                    if (res.data.gender === 1) {
+                        res.data.gender = "男"
+                    } else {
+                        res.data.gender = "女"
+                    }
+
+                    if(res.data.status===1){
+                        res.data.status="在职"
+                    }else{
+                        res.data.status="离职"
+                    }
+
+
+                    var department = res.data.department;
+                    if(department === null){
+                        var bumen = "待定"
+                    }else{
+                        var bumen = department.name
+                    }
+
+                    var salary = res.data.salary;
+                    if(salary === null){
+                        var xinzi = "待定"
+                    }else{
+                        var xinzi = salary.basicSalary
+                    }
+                    arr.push(`
+                    <form role="form">
+                        <div class="form-group">
+                            <label>姓名:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.name}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>性别:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.gender}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>联系电话:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.phone}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>邮件:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.email}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>地址:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.address}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>状态:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.status}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>部门:</label>
+                            <input  class="form-control" readonly="readonly" value="${bumen}"/>
+                        </div>
+
+                         <div class="form-group">
+                            <label>薪资:</label>
+                            <input  class="form-control" readonly="readonly" value="${xinzi}"/>
+                        </div>
+                    </form>
+                `)
+
+                    document.getElementById('employeeInfo').innerHTML = arr.join('')
+                }
+            })
+        }
+
+    }
+    window.employee = new Employee();
+</script>

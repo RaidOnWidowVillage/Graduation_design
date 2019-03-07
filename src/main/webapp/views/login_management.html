@@ -50,18 +50,6 @@
                                             </tr>
                                             </thead>
                                             <tbody id="listBody">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>阿莫西林</td>
-                                                <td>25.0</td>
-                                                <td>400</td>
-                                                <td>400</td>
-                                                <td>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
-                                                    <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">查看</a>
-                                                    <a class="btn btn-success btn-xs">删除</a>
-                                                </td>
-                                            </tr>
 
                                             </tbody>
                                         </table>
@@ -245,7 +233,6 @@
                 `)
 
                 document.getElementById('XiangQingUser').innerHTML = arr.join('')
-                document.getElementById('selectRole')[res.data.role].selected=true;
                 }
             })
         }

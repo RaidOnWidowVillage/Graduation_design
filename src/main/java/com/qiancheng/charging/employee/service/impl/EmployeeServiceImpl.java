@@ -51,8 +51,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public ServerResponse<List<EmployeeBO>> selectAllEmploy() {
-        List<EmployeeBO> result = employeeDao.select_All_Employee();
+    public ServerResponse<List<EmployeeBO>> selectAllEmploy(Employee employee) {
+        List<EmployeeBO> result = employeeDao.select_All_Employee(employee);
+        return ServerResponse.createBySuccess(result);
+    }
+
+    @Override
+    public ServerResponse<EmployeeBO> selectOneEmployee(String id) {
+        EmployeeBO result = employeeDao.select_One_Employee(id);
         return ServerResponse.createBySuccess(result);
     }
 
