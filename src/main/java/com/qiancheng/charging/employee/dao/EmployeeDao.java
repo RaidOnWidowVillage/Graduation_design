@@ -3,6 +3,7 @@ package com.qiancheng.charging.employee.dao;
 import com.qiancheng.charging.common.MyBatisDao;
 import com.qiancheng.charging.employee.entity.EmployeeBO;
 import com.qiancheng.charging.entity.Employee;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -15,11 +16,10 @@ public interface EmployeeDao {
             "values(UUID(),#{name},#{gender},#{phone},#{email},#{address},#{departmentId},#{position},#{status},#{salaryId},now(),now(),#{createUser},#{updateUser},#{contact})")
     int add_Employee(Employee employee);
 
-    @Update("update hr_employee SET status = #{status},updatetime = now(),updateuser=#{updateUser}\n" +
-            "WHERE id = #{id}")
+    @Delete("delete from hr_employee where id = #{id}")
     int del_Employee(Employee employee);
 
-    @Update("update hr_employee SET name = #{name},gender = #{gender},phone = #{phone},email = #{email},address = #{address},departmentId = #{departmentId},positionId = #{position},status = #{status},salaryId = #{salaryId},updatetime =now(),updateuser = #{updateUser},contact = #{contact}" +
+    @Update("update hr_employee SET name = #{name},gender = #{gender},phone = #{phone},email = #{email},address = #{address},departmentId = #{departmentId},status = #{status},salaryId = #{salaryId},updatetime =now(),updateuser = #{updateUser}" +
             "WHERE id = #{id}")
     int update_Employee(Employee employee);
 

@@ -2,7 +2,10 @@ package com.qiancheng.charging.login.web;
 
 import com.qiancheng.charging.common.ServerResponse;
 import com.qiancheng.charging.common.SessionContext;
+import com.qiancheng.charging.employee.service.EmployeeService;
+import com.qiancheng.charging.entity.Employee;
 import com.qiancheng.charging.entity.User;
+import com.qiancheng.charging.login.entity.UserVO;
 import com.qiancheng.charging.login.service.UserService;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
@@ -21,6 +25,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+
 
     @RequestMapping(value="/login" , method = {RequestMethod.POST})
     @ResponseBody
@@ -99,7 +105,11 @@ public class UserController {
     @RequestMapping(value="/AddUser" , method = {RequestMethod.POST})
     @ResponseBody
     public ServerResponse AddUser(User user){
+        String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+        user.setEmployeeId(uuid);
         return userService.register(user);
+
+
     }
 
 }

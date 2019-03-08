@@ -92,7 +92,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myEmployeeUpdateLabel">查看员工详细信息</h4>
+                    <h4 class="modal-title" id="myEmployeeUpdateLabel">更新员工详细信息</h4>
                 </div>
                 <div class="modal-body" id="myEmployeeUpdateInfo">
 
@@ -119,7 +119,6 @@
                     var kindname = dep.name;
                     $("#employeeBumen").append("<option value='"+dep.id+"'>"+kindname+"</option>");
                 }
-
             }
         });
     })
@@ -173,7 +172,7 @@
                             <td>
                                 <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myEmployeeUpdate" onclick="employee.updateInfo('${item.id}')">修改</a>
                                 <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal" onclick="employee.getOneInfo('${item.id}')">查看</a>
-                                <a class="btn btn-success btn-xs">删除</a>
+                                <a class="btn btn-success btn-xs"   onclick="employee.deleteEmployee('${item.id}' " >删除</a>
                             </td>
                         </tr>
                     `)
@@ -221,42 +220,42 @@
                     <form role="form">
                         <div class="form-group">
                             <label>姓名:</label>
-                            <input  class="form-control" readonly="readonly" value="${res.data.name}"/>
+                            <input  class="form-control" readonly="readonly"  value="${res.data.name}"/>
                         </div>
 
                         <div class="form-group">
                             <label>性别:</label>
-                            <input  class="form-control" readonly="readonly" value="${res.data.gender}"/>
+                            <input  class="form-control" readonly="readonly"  value="${res.data.gender}"/>
                         </div>
 
                         <div class="form-group">
                             <label>联系电话:</label>
-                            <input  class="form-control" readonly="readonly" value="${res.data.phone}"/>
+                            <input  class="form-control" readonly="readonly"  value="${res.data.phone}"/>
                         </div>
 
                         <div class="form-group">
                             <label>邮件:</label>
-                            <input  class="form-control" readonly="readonly" value="${res.data.email}"/>
+                            <input  class="form-control" readonly="readonly"  value="${res.data.email}"/>
                         </div>
 
                         <div class="form-group">
                             <label>地址:</label>
-                            <input  class="form-control" readonly="readonly" value="${res.data.address}"/>
+                            <input  class="form-control"  readonly="readonly"  value="${res.data.address}"/>
                         </div>
 
                         <div class="form-group">
                             <label>状态:</label>
-                            <input  class="form-control" readonly="readonly" value="${res.data.status}"/>
+                            <input  class="form-control" readonly="readonly"  value="${res.data.status}"/>
                         </div>
 
                         <div class="form-group">
                             <label>部门:</label>
-                            <input  class="form-control" readonly="readonly" value="${bumen}"/>
+                            <input  class="form-control" readonly="readonly"  value="${bumen}"/>
                         </div>
 
                          <div class="form-group">
                             <label>薪资:</label>
-                            <input  class="form-control" readonly="readonly" value="${xinzi}"/>
+                            <input  class="form-control" value="${xinzi}"/>
                         </div>
                     </form>
                 `)
@@ -303,47 +302,101 @@
                     <form role="form">
                         <div class="form-group">
                             <label>姓名:</label>
-                            <input  class="form-control" readonly="readonly" value="${res.data.name}"/>
+                            <input  class="form-control" id="updateEmployeeName" value="${res.data.name}"/>
                         </div>
 
                         <div class="form-group">
                             <label>性别:</label>
-                            <input  class="form-control" readonly="readonly" value="${res.data.gender}"/>
+                            <select class="form-control" id="updateEmployeeGender">
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label>联系电话:</label>
-                            <input  class="form-control" readonly="readonly" value="${res.data.phone}"/>
+                            <input  class="form-control" id="updateEmployeePhone" value="${res.data.phone}"/>
                         </div>
 
                         <div class="form-group">
                             <label>邮件:</label>
-                            <input  class="form-control" readonly="readonly" value="${res.data.email}"/>
+                            <input  class="form-control" id="updateEmployeeEmail"  value="${res.data.email}"/>
                         </div>
 
                         <div class="form-group">
                             <label>地址:</label>
-                            <input  class="form-control" readonly="readonly" value="${res.data.address}"/>
+                            <input  class="form-control" id="updateEmployeeAddress" value="${res.data.address}"/>
                         </div>
 
                         <div class="form-group">
                             <label>状态:</label>
-                            <input  class="form-control" readonly="readonly" value="${res.data.status}"/>
+                            <select class="form-control" id="updateEmployeeStatus">
+                                <option value="1">工作中</option>
+                                <option value="2">休假中</option>
+                                <option value="3">出差中</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label>部门:</label>
-                            <input  class="form-control" readonly="readonly" value="${bumen}"/>
+                            <select class="form-control" id="employeeUpdateBumen"></select>
                         </div>
 
                          <div class="form-group">
                             <label>薪资:</label>
-                            <input  class="form-control" readonly="readonly" value="${xinzi}"/>
+                            <input  class="form-control" id="updateEmployeeXinzi"  value="${xinzi}"/>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <input type="button"  class="btn btn-success" value="修改" onclick="employee.updateEmployee('${id}')"/>
                         </div>
                     </form>
                 `)
 
                     document.getElementById('myEmployeeUpdateInfo').innerHTML = arr.join('')
+
+                    $.ajax({
+                        type:'post',
+                        url:"../department/select_department",
+                        success:function (data) {
+                            $("#employeeUpdateBumen").append("<option value=''>-请选择-</option>");
+                            depList = data.data;
+                            for(var i = 0;i < depList.length ; i++){
+                                var dep = depList[i];
+                                var kindname = dep.name;
+                                $("#employeeUpdateBumen").append("<option value='"+dep.id+"'>"+kindname+"</option>");
+                            }
+                        }
+                    });
+                }
+            })
+        }
+
+        this.updateEmployee = function (id) {
+            var name = $("#updateEmployeeName").val();
+            var gender = $("#updateEmployeeGender").val();
+            var phone = $("#updateEmployeePhone").val();
+            var email = $("#updateEmployeeEmail").val();
+            var address = $("#updateEmployeeAddress").val();
+            var status = $("#updateEmployeeStatus").val();
+            var bumen = $("#employeeUpdateBumen").val();
+            var xinzi = $("#updateEmployeeXinzi").val();
+
+            $.post("../employee/update_employee.api",{name:name,gender:gender,phone:phone,email:email,address:address,status:status,departmentId:bumen,salaryId:xinzi,id:id},function(res) {
+                if (null != res) {
+                    console.log(res)
+                    toastr.success("修改成功");
+                    employee.render();
+                }
+            })
+        }
+
+        this.deleteEmployee = function (id) {
+            $.get("../employee/del_employee.api",{id:id},function(res) {
+                if (null != res) {
+                    console.log(res)
+                    toastr.success("删除成功");
+                    employee.render();
                 }
             })
         }

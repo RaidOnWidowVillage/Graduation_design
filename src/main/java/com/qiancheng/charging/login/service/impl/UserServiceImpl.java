@@ -1,8 +1,10 @@
 package com.qiancheng.charging.login.service.impl;
 
 import com.qiancheng.charging.common.ServerResponse;
+import com.qiancheng.charging.employee.service.EmployeeService;
 import com.qiancheng.charging.login.dao.UserDao;
 import com.qiancheng.charging.entity.User;
+import com.qiancheng.charging.login.entity.UserVO;
 import com.qiancheng.charging.login.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +17,12 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserDao userDao;
 
-
     @Override
     public ServerResponse<String> register(User user){
+
         Integer result = userDao.insert_user(user);
-        if(result>0){
+        Integer result2 =userDao.insert_employee(user);
+        if(result>0&&result2>0){
             return ServerResponse.createBySuccess("注册成功");
         }else{
             return ServerResponse.createByErrorMessage("注册失败");

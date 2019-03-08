@@ -1,37 +1,38 @@
-package com.qiancheng.charging.entity;
+package com.qiancheng.charging.login.entity;
+
+import com.qiancheng.charging.entity.Employee;
 
 import java.sql.Date;
 
-public class User {
+public class UserBO {
     private String id; //用户id
     private String username; //用户名
     private String password; //密码
     private int role; //角色 0普通用户 1管理员
     private int flag;
-    private String employeeId; //员工id
+    private Employee employee; //员工id
     private Date createTime;
     private Date updateTime;
     private String createUser;
     private String updateUser;
     private Date lastLoginTime;
-    private String name;
-    public User() {
+
+    public UserBO() {
 
     }
 
-    public User(String id, String username, String password, int role, int flag, String employeeId, Date createTime, Date updateTime, String createUser, String updateUser, Date lastLoginTime, String name) {
+    public UserBO(String id, String username, String password, int role, int flag, Employee employee, Date createTime, Date updateTime, String createUser, String updateUser, Date lastLoginTime) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
         this.flag = flag;
-        this.employeeId = employeeId;
+        this.employee = employee;
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.createUser = createUser;
         this.updateUser = updateUser;
         this.lastLoginTime = lastLoginTime;
-        this.name = name;
     }
 
     public String getId() {
@@ -74,14 +75,6 @@ public class User {
         this.flag = flag;
     }
 
-    public String getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
-    }
-
     public Date getCreateTime() {
         return createTime;
     }
@@ -122,11 +115,11 @@ public class User {
         this.lastLoginTime = lastLoginTime;
     }
 
-    public String getName() {
-        return name;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

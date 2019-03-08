@@ -44,7 +44,7 @@
                                                 <th>编号</th>
                                                 <th>用户名</th>
                                                 <th>角色</th>
-                                                <th>职位</th>
+                                                <th>姓名</th>
                                                 <th>状态</th>
                                                 <th>操作</th>
                                             </tr>
@@ -105,8 +105,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>职位:</label>
-                            <input  class="form-control" placeholder="请输入职位" id="addPosition"/>
+                            <label>姓名:</label>
+                            <input  class="form-control" placeholder="请输入姓名" id="addName"/>
                         </div>
                         <div class="form-group">
                             <label>状态:</label>
@@ -175,7 +175,7 @@
                             <td>${num}</td>
                             <td>${item.username}</td>
                             <td>${item.role}</td>
-                            <td>${item.employeeId}</td>
+                            <td>${item.name}</td>
                             <td>${item.flag}</td>
                             <td>
                                 <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#UpdateUser" onclick="user.updateUserInfo('${item.id}')">修改</a>
@@ -221,8 +221,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label>职位:</label>
-                            <input  class="form-control" readonly="readonly" value="${res.data.employeeId}"/>
+                            <label>姓名:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.name}"/>
                         </div>
 
                         <div class="form-group">
@@ -261,11 +261,6 @@
                         </div>
 
                         <div class="form-group">
-                            <label>职位</label>
-                            <input id="updatePosition"  class="form-control"  value="${res.data.employeeId}"/>
-                        </div>
-
-                        <div class="form-group">
                             <label>状态</label>
                             <select class="form-control" id="updateStatus">
                                 <option value="1">在职</option>
@@ -288,9 +283,8 @@
             var username = $("#updateUsername").val();
             var password = $("#updatePassword").val();
             var role = $("#updateRole").val();
-            var position = $("#updatePosition").val();
             var flag = $("#updateStatus").val();
-            $.post("../user/UpdateUser.api",{username:username,password:password,role:role,position:position,flag:flag,id:id},function(res) {
+            $.post("../user/UpdateUser.api",{username:username,password:password,role:role,flag:flag,id:id},function(res) {
                 if (null != res) {
                     console.log(res)
                     toastr.success("修改成功");
@@ -313,9 +307,9 @@
             var username = $("#addUsername").val();
             var password = $("#addPassword").val();
             var role = $("#addRole").val();
-            var position = $("#addPosition").val();
+            var name = $("#addName").val();
             var flag = $("#addStatus").val();
-            $.post("../user/AddUser.api",{username:username,password:password,role:role,position:position,flag:flag},function(res) {
+            $.post("../user/AddUser.api",{username:username,password:password,role:role,name:name,flag:flag},function(res) {
                 if (null != res) {
                     console.log(res)
                     toastr.success("增加成功");

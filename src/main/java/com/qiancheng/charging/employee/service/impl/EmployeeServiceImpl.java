@@ -29,7 +29,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public ServerResponse<Integer> delEmploy(Employee employee) {
-        employee.setStatus(9);//删除员工状态
         int result = employeeDao.del_Employee(employee);
         //如果删除一条成功，返回1
         if(result>0){
