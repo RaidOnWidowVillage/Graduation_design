@@ -29,8 +29,9 @@
                                         <label>当前状态</label>
                                         <select class="form-control" id="employeeStatus">
                                             <option value="0">-请选择-</option>
-                                            <option value="1">请假</option>
-                                            <option value="2">出差</option>
+                                            <option value="1">工作中</option>
+                                            <option value="2">休假中</option>
+                                            <option value="3">出差中</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-1"></div>
@@ -85,6 +86,21 @@
             </div>
         </div>
     </div>
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" style="top:100px;" id="myEmployeeUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myEmployeeUpdateLabel">查看员工详细信息</h4>
+                </div>
+                <div class="modal-body" id="myEmployeeUpdateInfo">
+
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="../resources/assets/js/admin_include.js"></script>
@@ -110,7 +126,7 @@
 
     function Employee() {
         this.render = function () {
-            debugger
+
             var name = $("#employeeName").val();
             var gender = $("#employeeGender").val();
             var departmentId = $("#employeeBumen").val();
@@ -129,10 +145,12 @@
                             item.gender = "女"
                         }
 
-                        if (item.status === 1) {
-                            item.status = "在职"
-                        } else {
-                            item.status = "离职"
+                        if(item.status === 1){
+                            item.status="工作中"
+                        }else if(item.status === 2){
+                            item.status="休假中"
+                        }else if(item.status === 3){
+                            item.status="出差中"
                         }
 
                         department = item.department;
@@ -153,7 +171,7 @@
                             <td>${bumen}</td>
                             <td>${item.status}</td>
                             <td>
-                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">修改</a>
+                                <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myEmployeeUpdate" onclick="employee.updateInfo('${item.id}')">修改</a>
                                 <a class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal" onclick="employee.getOneInfo('${item.id}')">查看</a>
                                 <a class="btn btn-success btn-xs">删除</a>
                             </td>
@@ -178,9 +196,11 @@
                     }
 
                     if(res.data.status===1){
-                        res.data.status="在职"
-                    }else{
-                        res.data.status="离职"
+                        res.data.status="工作中"
+                    }else if(res.data.status===2){
+                        res.data.status="休假中"
+                    }else if(res.data.status===3){
+                        res.data.status="出差中"
                     }
 
 
@@ -246,6 +266,87 @@
             })
         }
 
+        this.updateInfo = function (id) {
+            $.get("../employee/select_one_employee.api", {id:id}, function (res) {
+                if (null != res) {
+                    var arr = []
+
+                    if (res.data.gender === 1) {
+                        res.data.gender = "男"
+                    } else {
+                        res.data.gender = "女"
+                    }
+
+                    if(res.data.status===1){
+                        res.data.status="工作中"
+                    }else if(res.data.status===2){
+                        res.data.status="休假中"
+                    }else if(res.data.status===3){
+                        res.data.status="出差中"
+                    }
+
+
+                    var department = res.data.department;
+                    if(department === null){
+                        var bumen = "待定"
+                    }else{
+                        var bumen = department.name
+                    }
+
+                    var salary = res.data.salary;
+                    if(salary === null){
+                        var xinzi = "待定"
+                    }else{
+                        var xinzi = salary.basicSalary
+                    }
+                    arr.push(`
+                    <form role="form">
+                        <div class="form-group">
+                            <label>姓名:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.name}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>性别:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.gender}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>联系电话:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.phone}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>邮件:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.email}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>地址:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.address}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>状态:</label>
+                            <input  class="form-control" readonly="readonly" value="${res.data.status}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>部门:</label>
+                            <input  class="form-control" readonly="readonly" value="${bumen}"/>
+                        </div>
+
+                         <div class="form-group">
+                            <label>薪资:</label>
+                            <input  class="form-control" readonly="readonly" value="${xinzi}"/>
+                        </div>
+                    </form>
+                `)
+
+                    document.getElementById('myEmployeeUpdateInfo').innerHTML = arr.join('')
+                }
+            })
+        }
     }
     window.employee = new Employee();
 </script>
