@@ -22,8 +22,10 @@ public interface DepartmentDao {
     List<DepartmentBO> select_hr_department();
     //根据部门名称查询信息
     @Select({"<script>select a.id,a.name,a.createtime as createTime,a.manager,b.counte from hr_department as a left join (select departmentId,count(id) as counte from hr_employee GROUP BY departmentId) as b  on a.id = b. departmentId<where>" +
-            "<if test='name!=null'>and a.name=#{name}</if>" +
-            "<if test='manager!=null'>and a.manager=#{manager}</if>" +
+            "<if test= \"name != '' and name!=null  \">" +
+            "and a.name=#{name}</if>" +
+            "<if test= \"manager != '' and manager!=null  \">" +
+            "and a.manager=#{manager}</if>" +
             "</where></script>"})
-    List<DepartmentBO> queryby_hr_department(@Param("name") String name , @Param("manager") String manager);
+    List<DepartmentBO> queryby_hr_department(Department dep);
 }

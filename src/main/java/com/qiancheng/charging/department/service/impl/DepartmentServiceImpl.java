@@ -62,9 +62,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public ServerResponse<List<DepartmentBO>> queryBy(Department dep) {
-        String name = dep.getName();
-        String manager = dep.getManager();
-        List<DepartmentBO> deps = departmentDao.queryby_hr_department(name, manager);
+
+        List<DepartmentBO> deps = departmentDao.queryby_hr_department(dep);
         if (deps != null) {
             return ServerResponse.createBySuccess("查询部门成功",deps);
         } else {
