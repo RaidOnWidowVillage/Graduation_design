@@ -2,6 +2,7 @@ package com.qiancheng.charging.department.service.impl;
 
 import com.qiancheng.charging.common.ServerResponse;
 import com.qiancheng.charging.department.dao.DepartmentDao;
+import com.qiancheng.charging.department.entity.DepartmentBO;
 import com.qiancheng.charging.entity.Department;
 import com.qiancheng.charging.department.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public ServerResponse queryAllDepartment() {
-        List<Department> dep = departmentDao.select_hr_department();
+    public ServerResponse<List<DepartmentBO>> queryAllDepartment() {
+        List<DepartmentBO> dep = departmentDao.select_hr_department();
         //如果查询一条成功，返回1
         if (dep != null) {
             return ServerResponse.createBySuccess("查询部门成功",dep);
@@ -60,25 +61,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public ServerResponse queryBy(Department dep) {
+    public ServerResponse<List<DepartmentBO>> queryBy(Department dep) {
         String name = dep.getName();
         String manager = dep.getManager();
-        List<Department> deps = departmentDao.queryby_hr_department(name, manager);
+        List<DepartmentBO> deps = departmentDao.queryby_hr_department(name, manager);
         if (deps != null) {
             return ServerResponse.createBySuccess("查询部门成功",deps);
         } else {
             return ServerResponse.createByErrorMessage("查询部门失败");
         }
     }
-
-
-//    @Override
-//    public ServerResponse<Department> queryByName(String name) {
-//        Department dept = departmentDao.querybyname_hr_department();
-//        if (dept != null) {
-//            return ServerResponse.createBySuccessMessage("查询部门成功");
-//        } else {
-//            return ServerResponse.createByErrorMessage("查询部门失败");
-//        }
-//    }
 }
