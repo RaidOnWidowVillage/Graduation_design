@@ -12,9 +12,10 @@
                                         <label>姓名</label>
                                         <input type="text" class="form-control" id="employeeName"/>
                                     </div>
-                                    <div class="form-group col-md-1">
+                                    <div class="form-group col-md-2">
                                         <label>性别</label>
                                         <select class="form-control" id="employeeGender">
+                                            <option value="0">-请选择-</option>
                                             <option value="1">男</option>
                                             <option value="2">女</option>
                                         </select>
@@ -27,6 +28,7 @@
                                     <div class="form-group col-md-2">
                                         <label>当前状态</label>
                                         <select class="form-control" id="employeeStatus">
+                                            <option value="0">-请选择-</option>
                                             <option value="1">请假</option>
                                             <option value="2">出差</option>
                                         </select>
@@ -94,7 +96,8 @@
             type:'post',
             url:"../department/select_department",
             success:function (data) {
-                    depList = data.data;
+                $("#employeeBumen").append("<option value=''>-请选择-</option>");
+                depList = data.data;
                 for(var i = 0;i < depList.length ; i++){
                     var dep = depList[i];
                     var kindname = dep.name;
