@@ -1,10 +1,11 @@
-package com.qiancheng.charging.entity;
+package com.qiancheng.charging.attendance.entity;
 
 import java.sql.Date;
 
-public class Attendance {
+public class AttendanceBO {
     private String id;   //考勤ID
     private String userId; // 用户Id
+    private String name;
     private Date startTime; //开始时间
     private Date endTime; //结束时间
     private String reason; //原因
@@ -15,12 +16,13 @@ public class Attendance {
     private String createUser;
     private String updateUser;
 
-    public Attendance() {
+    public AttendanceBO() {
     }
 
-    public Attendance(String id, String userId, Date startTime, Date endTime, String reason, int type, int flag, Date createTime, Date updateTime, String createUser, String updateUser) {
+    public AttendanceBO(String id, String userId, String name, Date startTime, Date endTime, String reason, int type, int flag, Date createTime, Date updateTime, String createUser, String updateUser) {
         this.id = id;
         this.userId = userId;
+        this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
         this.reason = reason;
@@ -38,6 +40,22 @@ public class Attendance {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getStartTime() {
@@ -110,13 +128,5 @@ public class Attendance {
 
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 }
