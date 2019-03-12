@@ -1,13 +1,18 @@
 package com.qiancheng.charging.employee.web;
 
 import com.qiancheng.charging.common.ServerResponse;
+import com.qiancheng.charging.employee.entity.EmployeeBO;
 import com.qiancheng.charging.employee.service.EmployeeService;
 import com.qiancheng.charging.entity.Employee;
+import com.qiancheng.charging.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/employee")
@@ -57,7 +62,6 @@ public class EmployeeController {
     //查询员工信息
     @RequestMapping(value="/select_one_employee" , method = {RequestMethod.GET})
     @ResponseBody
-    public ServerResponse SelectOneEmployee(String id){
-        return employeeService.selectOneEmployee(id);
+    public ServerResponse SelectOneEmployee(String id){ return employeeService.selectOneEmployee(id);
     }
 }
