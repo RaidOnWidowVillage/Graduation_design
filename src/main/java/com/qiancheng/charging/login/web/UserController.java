@@ -51,7 +51,7 @@ public class UserController {
                     SessionContext.AddSession(session);
                     //更新上次登陆时间
                     userService.lastLoginTime(res.getId());
-                    return ServerResponse.createBySuccessMessage("登录成功");
+                    return ServerResponse.createBySuccess("登录成功",result.getData());
                 }else{
                     return ServerResponse.createByErrorMessage("账户名与密码错误");
                 }

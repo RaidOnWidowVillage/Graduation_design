@@ -63,9 +63,16 @@
                 if(null !== res){
                     if(res.status === 0){
                         toastr.success("登录成功");
-                        setTimeout(function(){
-                            window.location.href = "/admin/index.html";
-                        },0);
+                        if(res.data.role === 0 ){
+                            setTimeout(function(){
+                                window.location.href = "/user/index.html";
+                            },0);
+                        }else{
+                            setTimeout(function(){
+                                window.location.href = "/admin/index.html";
+                            },0);
+                        }
+
                     }else{
                         toastr.error("账号或者密码错误");
                     }

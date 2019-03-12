@@ -15,7 +15,7 @@
                                     <div class="form-group col-md-1"></div>
                                     <div class="form-group col-md-1">
                                         <div style="height: 24px"></div>
-                                        <button type="button" class="btn btn-success" onclick="user.render()">条件搜索</button>
+                                        <button type="button" class="btn btn-success" onclick="attendance.render()">条件搜索</button>
                                     </div>
                                 </div>
                             </form>
@@ -146,7 +146,7 @@
             document.getElementById('updateAttendanceForm').innerHTML = arr.join('')
         }
         this.updateAttendance = function (id) {
-            debugger
+
             var flag = $("#updateStatus").val();
             $.post("../attendance/update_attendance.api",{id:id,flag:flag},function(res) {
                 if (null != res) {
