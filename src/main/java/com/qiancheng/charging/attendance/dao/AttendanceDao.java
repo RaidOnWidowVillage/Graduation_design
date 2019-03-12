@@ -4,6 +4,7 @@ import com.qiancheng.charging.attendance.entity.AttendanceBO;
 import com.qiancheng.charging.common.MyBatisDao;
 import com.qiancheng.charging.entity.Attendance;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -20,4 +21,11 @@ public interface AttendanceDao {
 
     @Delete("delete from hr_attendance where id = #{id}")
     Integer deleteAttendance(String id);
+
+    @Update("update hr_attendance set starttime = #{startTime}, endtime = #{endTime},reason = #{reason} where id = #{id}")
+    Integer updateAttendanceDate(Attendance attendance);
+
+    @Insert("insert into hr_attendance(id,starttime,endtime,reason,type,flag,createtime,updatetime,createuser,updateuser,user_id) " +
+            "values(UUID(),#{startTime},#{endTime},#{reason},1,1,now(),now(),#{createUser},#{updateUser},#{userId})")
+    Integer insertAttendance(Attendance attendance);
 }

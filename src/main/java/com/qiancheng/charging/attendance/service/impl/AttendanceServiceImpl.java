@@ -44,4 +44,26 @@ public class AttendanceServiceImpl implements AttendanceService {
             return ServerResponse.createByErrorMessage("删除失败");
         }
     }
+
+    @Override
+    public ServerResponse updateAttendanceDate(Attendance attendance) {
+        Integer result = attendanceDao.updateAttendanceDate(attendance);
+        //如果增加一条成功，返回1
+        if(result>0){
+            return ServerResponse.createBySuccess("更新成功");
+        }else{
+            return ServerResponse.createByErrorMessage("更新失败");
+        }
+    }
+
+    @Override
+    public ServerResponse insertAttendance(Attendance attendance) {
+        Integer result = attendanceDao.insertAttendance(attendance);
+        //如果增加一条成功，返回1
+        if(result>0){
+            return ServerResponse.createBySuccess("新增成功");
+        }else{
+            return ServerResponse.createByErrorMessage("新增失败");
+        }
+    }
 }

@@ -12,4 +12,8 @@ public interface AttendanceService {
     ServerResponse updateAttendance(Attendance attendance);
 
     ServerResponse deleteAttendance(String id);
+
+    ServerResponse updateAttendanceDate(Attendance attendance);
+
+    ServerResponse insertAttendance(Attendance attendance);
 }
