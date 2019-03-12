@@ -180,7 +180,7 @@
         var phone =  $("#phone").val();
         var email = $("#email").val();
         var address = $("#address").val();
-        $.post("../employee/update_employee.api", {id:id,phone:phone,email:email,address:address}, function (res) {
+        $.post("../employee/update_personal.api", {id:id,phone:phone,email:email,address:address}, function (res) {
             if(null !== res){
                 if(res.status === 0){
                     var newid = res.data.id;

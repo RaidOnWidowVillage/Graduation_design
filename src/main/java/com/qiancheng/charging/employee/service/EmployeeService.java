@@ -12,4 +12,5 @@ public interface EmployeeService {
     ServerResponse<Integer> updateEmploy(Employee employee); //更新员工
     ServerResponse<List<EmployeeBO>> selectAllEmploy(Employee employee); //查询所有员工
     ServerResponse<EmployeeBO> selectOneEmployee(String id);//查询员工信息
+    ServerResponse<Integer> updatePersonal(Employee employee); //更新个人
 }

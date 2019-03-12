@@ -50,6 +50,19 @@ public class EmployeeController {
         }
 
     }
+    //更新个人信息
+    @RequestMapping(value="/update_personal" , method = {RequestMethod.POST})
+    @ResponseBody
+    public ServerResponse UpdatePersonal(Employee employee){
+        employee.setUpdateUser("jayne");//设置修改者
+        //数据验证
+        if(employee.getPhone()==null&&employee.getEmail()==null&&employee.getAddress()==null){
+            return ServerResponse.createByErrorMessage("参数错误");
+        }else{
+            return employeeService.updatePersonal(employee);
+        }
+
+    }
 
     //查询员工信息
     @RequestMapping(value="/select_all_employee" , method = {RequestMethod.GET})

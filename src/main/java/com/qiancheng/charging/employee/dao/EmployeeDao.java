@@ -23,6 +23,9 @@ public interface EmployeeDao {
             "WHERE id = #{id}")
     int update_Employee(Employee employee);
 
+    @Update("update hr_employee SET phone = #{phone},email = #{email},address = #{address},updatetime =now(),updateuser = #{updateUser}" +
+            "WHERE id = #{id}")
+    int update_Personal(Employee employee);
     @Select("<script>"
            + "SELECT a.id,a.name,a.gender,a.phone,a.email,a.address,a.status,a.contact,"
            + "b.name as 'department.name',b.id as 'department.id',"

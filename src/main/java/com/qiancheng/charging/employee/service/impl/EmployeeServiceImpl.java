@@ -61,5 +61,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         return ServerResponse.createBySuccess(result);
     }
 
+    @Override
+    public ServerResponse<Integer> updatePersonal(Employee employee) {
+        int result = employeeDao.update_Personal(employee);
+        //如果更新一条成功，返回1
+        if(result>0){
+            return ServerResponse.createBySuccessMessage("更新个人成功");
+        }else{
+            return ServerResponse.createByErrorMessage("更新个人失败");
+        }
+    }
+
 
 }
