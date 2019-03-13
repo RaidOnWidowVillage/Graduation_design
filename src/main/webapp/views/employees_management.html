@@ -73,7 +73,7 @@
         </div>
     </div>
     <!-- 模态框（Modal） -->
-    <div class="modal fade" style="top:100px;" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" style="top:0px;" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -88,7 +88,7 @@
     </div>
 
     <!-- 模态框（Modal） -->
-    <div class="modal fade" style="top:100px;" id="myEmployeeUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" style="top:0px;" id="myEmployeeUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -211,10 +211,11 @@
                     }
 
                     var salary = res.data.salary;
+                    debugger
                     if(salary === null){
                         var xinzi = "待定"
                     }else{
-                        var xinzi = salary.basicSalary
+                        var xinzi = salary.name
                     }
                     arr.push(`
                     <form role="form">
@@ -254,7 +255,7 @@
                         </div>
 
                          <div class="form-group">
-                            <label>薪资:</label>
+                            <label>等级:</label>
                             <input  class="form-control" value="${xinzi}"/>
                         </div>
                     </form>
@@ -292,11 +293,12 @@
                         var bumen = department.name
                     }
 
-                    var salary = res.data.salary;
+                    var salary = res.data.salaryId;
+
                     if(salary === null){
                         var xinzi = "待定"
                     }else{
-                        var xinzi = salary.basicSalary
+                        var xinzi = res.data.salaryId
                     }
                     arr.push(`
                     <form role="form">
@@ -343,8 +345,8 @@
                         </div>
 
                          <div class="form-group">
-                            <label>薪资:</label>
-                            <input  class="form-control" id="updateEmployeeXinzi"  value="${xinzi}"/>
+                            <label>等级:</label>
+                            <select class="form-control" id="updateEmployeeXinzi"></select>
                         </div>
 
                         <div style="text-align: center;">
@@ -365,6 +367,20 @@
                                 var dep = depList[i];
                                 var kindname = dep.name;
                                 $("#employeeUpdateBumen").append("<option value='"+dep.id+"'>"+kindname+"</option>");
+                            }
+                        }
+                    });
+
+                    $.ajax({
+                        type:'post',
+                        url:"../salary/select_salary",
+                        success:function (data) {
+                            $("#updateEmployeeXinzi").append("<option value=''>-请选择-</option>");
+                            depList = data.data;
+                            for(var i = 0;i < depList.length ; i++){
+                                var dep = depList[i];
+                                var kindname = dep.name;
+                                $("#updateEmployeeXinzi").append("<option value='"+dep.id+"'>"+kindname+"</option>");
                             }
                         }
                     });

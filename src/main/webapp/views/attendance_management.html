@@ -146,6 +146,17 @@
             document.getElementById('updateAttendanceForm').innerHTML = arr.join('')
         }
 
+        this.updateAttendance = function (id) {
+
+            var flag = $("#updateStatus").val();
+            $.post("../attendance/update_attendance.api",{id:id,flag:flag},function(res) {
+                if (null != res) {
+                    toastr.success("修改成功");
+                    attendance.render()
+                }
+            })
+        }
+
 
         this.deleteAttendance = function (id) {
             $.get("../attendance/delete_attendance.api",{id:id},function(res) {

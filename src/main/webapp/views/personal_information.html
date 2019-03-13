@@ -37,7 +37,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myInfoLabel">创建部门</h4>
+                    <h4 class="modal-title" id="myInfoLabel">修改信息</h4>
                 </div>
                 <div class="modal-body">
                     <form role="form">
@@ -83,7 +83,6 @@
             $.get("../employee/select_one_employee.api", {id:id}, function (res) {
                 if (null != res) {
                     var arr = []
-
                     if (res.data.gender === 1) {
                         res.data.gender = "男"
                     } else {
@@ -109,7 +108,9 @@
                     var salary = res.data.salary;
                     if(salary === null){
                         var xinzi = "待定"
+                        var dengji = "待定"
                     }else{
+                        var dengji = salary.name
                         var xinzi = salary.basicSalary
                     }
                         arr.push(`
@@ -136,6 +137,10 @@
                              <tr>
                                 <td>部门：</td>
                                 <td>${bumen}</td>
+                             </tr>
+                             <tr>
+                                 <td>等级：</td>
+                                 <td>${dengji}</td>
                              </tr>
                              <tr>
                                  <td>薪资：</td>
