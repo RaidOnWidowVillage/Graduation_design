@@ -38,7 +38,6 @@ public class UserServiceImpl implements UserService{
         }else{
             return ServerResponse.createByErrorMessage("账号不存在");
         }
-
     }
 
     @Override
@@ -94,6 +93,16 @@ public class UserServiceImpl implements UserService{
             return  ServerResponse.createBySuccessMessage("删除成功");
         }else{
             return ServerResponse.createByErrorMessage("删除失败");
+        }
+    }
+
+    @Override
+    public ServerResponse selectByUserName(User user) {
+        Integer result = userDao.selectByUsername(user);
+        if(result >= 1){
+            return  ServerResponse.createByErrorMessage("用户名已注册");
+        }else{
+            return  ServerResponse.createBySuccessMessage("可以注册");
         }
     }
 

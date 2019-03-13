@@ -22,6 +22,10 @@ public interface UserDao {
     @Select("SELECT id,username,password,name,role,flag,employeeId,createtime,updatetime,createuser,updateuser,last_login_time as lastLoginTime from hr_user where username = #{username}")
     User selectUserByUsername(User user);
 
+
+    @Select("SELECT count(id) from hr_user where username = #{username}")
+    Integer selectByUsername(User user);
+
     @Update("update hr_user set last_login_time=now() where id = #{id}")
     Integer updateLastLoginTime(String id);
 

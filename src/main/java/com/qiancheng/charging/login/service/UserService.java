@@ -21,4 +21,7 @@ public interface UserService {
     ServerResponse<Integer> updateUserById(User user);
     //删除用户
     ServerResponse deleteUserById(String id);
+
+    //查询用户是否唯一
+    ServerResponse selectByUserName(User user);
 }

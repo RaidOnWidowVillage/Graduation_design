@@ -311,9 +311,13 @@
             var flag = $("#addStatus").val();
             $.post("../user/AddUser.api",{username:username,password:password,role:role,name:name,flag:flag},function(res) {
                 if (null != res) {
-                    console.log(res)
-                    toastr.success("增加成功");
-                    user.render()
+                    debugger
+                    if(res.status === -1){
+                        toastr.error("用户名已存在");
+                    }else {
+                        toastr.success("增加成功");
+                        user.render()
+                    }
                 }
             })
         }

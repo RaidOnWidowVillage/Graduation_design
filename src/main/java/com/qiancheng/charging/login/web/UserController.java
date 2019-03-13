@@ -107,9 +107,10 @@ public class UserController {
     public ServerResponse AddUser(User user){
         String uuid = UUID.randomUUID().toString().replaceAll("-", "");
         user.setEmployeeId(uuid);
-        return userService.register(user);
-
-
+        if(userService.selectByUserName(user).getStatus() == -1){
+            return ServerResponse.createByErrorMessage("用户名已存在");
+        }else{
+            return userService.register(user);
+        }
     }
-
 }
