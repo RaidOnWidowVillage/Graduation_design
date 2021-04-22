@@ -14,7 +14,7 @@
   <!-- 工具版本设置 -->
   <spring.version>4.1.9.RELEASE</spring.version>
   <sitemesh.version>2.4.2</sitemesh.version>
-  <mybatis.version>3.2.8</mybatis.version>
+  <mybatis.version>3.5.6</mybatis.version>
   <mybatis-spring.version>1.2.3</mybatis-spring.version>
   <mysql.driver.version>5.1.30</mysql.driver.version>
   <druid.version>1.0.18</druid.version>
