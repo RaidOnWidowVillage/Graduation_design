@@ -12,7 +12,7 @@
 <!-- 项目属性 -->
 <properties>
   <!-- 工具版本设置 -->
-  <spring.version>4.1.9.RELEASE</spring.version>
+  <spring.version>4.2.7.RELEASE</spring.version>
   <sitemesh.version>2.4.2</sitemesh.version>
   <mybatis.version>3.2.8</mybatis.version>
   <mybatis-spring.version>1.2.3</mybatis-spring.version>
